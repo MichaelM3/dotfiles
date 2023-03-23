@@ -1,4 +1,4 @@
-PROMPT="%B%{$fg[blue]%}[%{$fg[white]%}%\mac%{$fg[red]%}@%{$fg[white]%}%\mike%{$fg[blue]%}]%{$reset_color%}%  %(?:%{$fg_bold[green]%}➜ :%{$fg_bold[red]%}➜ )"
+PROMPT="%B%{$fg[blue]%}[%{$fg[white]%}%\arch%{$fg[red]%}@%{$fg[white]%}%\mike%{$fg[blue]%}]%{$reset_color%}%  %(?:%{$fg_bold[green]%}➜ :%{$fg_bold[red]%}➜ )"
 PROMPT+=' %{$fg[cyan]%}%c%{$reset_color%} $(git_prompt_info)'
 # PROMPT+=' %{$fg[cyan]%}%c%{$reset_color%} $(git_prompt_info)'
 ZSH_THEME_GIT_PROMPT_PREFIX="%{$fg_bold[blue]%}(%{$fg[red]%}"

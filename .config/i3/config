@@ -6,13 +6,13 @@
 # 	position top
 # 	status_command i3status
 # }
-exec_always --no-startup-id $HOME/.config/polybar/launch.sh --material
+exec_always --no-startup-id $HOME/.config/polybar/material/launch.sh
 exec_always --no-startup-id autotiling
 #
 # #---Basic Definitions---# #
 smart_gaps on
 smart_borders on
-set $inner_gaps 15
+set $inner_gaps 5
 set $outer_gaps 0
 set $term --no-startup-id alacritty 
 set $mod Mod4
@@ -28,8 +28,8 @@ floating_modifier $mod
 
 # #---Gaps---# #
 for_window [class="^.*"] border pixel 2
-gaps inner $inner_gaps
-gaps outer $outer_gaps
+# gaps inner $inner_gaps
+# gaps outer $outer_gaps
 
 # #---Basic Bindings---# #
 bindsym $mod+Return		           exec $term

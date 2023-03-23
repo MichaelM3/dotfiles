@@ -1,19 +1,16 @@
 # Uncomment the following line to use case-sensitive completion.
-CASE_SENSITIVE="true"
+# CASE_SENSITIVE="true"
 
 zle_highlight=('paste:none')
 
 # Which plugins would you like to load?
 plugins=(
-  git
   zsh-syntax-highlighting
   zsh-autosuggestions
   zsh-vi-mode
-  zsh-nvm
-  zsh-rvm-lazy
+  git
 )
-# export ZSH="/home/$USER/.oh-my-zsh"
-export ZSH="$HOME/.oh-my-zsh"
+export ZSH="/home/$USER/.oh-my-zsh"
 source $ZSH/oh-my-zsh.sh
 
 # export
@@ -31,21 +28,25 @@ export FZF_DEFAULT_COMMAND='rg --files --hidden'
 export FZF_ALT_C_COMMAND="$FZF_DEFAULT_COMMAND"
 export MANPAGER='nvim +Man!'
 export MANWIDTH=999
+export PATH=/user/bin/python3.11:$PATH
+export PATH=/home/$USER/.cargo/bin:$PATH
+export PATH=/home/$USER/.local/go/bin:$PATH
+export GOPATH=$HOME/.local/go
 
-export GOROOT=/usr/local/go
-# export GOROOT=/usr/lib/go
-export PATH=$PATH:/usr/local/go/bin
+# fnm
+# eval "$(zoxide init zsh)"
+
+# export GOROOT=/usr/local/go
+export GOROOT=/usr/lib/go
+export PATH=$PATH:/usr/lib/go/bin
 export GOPATH=~/Development/go
-# export GOPATH=/Volumes/Seagate/Development/go
 export PATH=$HOME/.local/bin:$PATH
 export PATH=$HOME/.local/bin/statusbar:$PATH
 export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 
-# DB Variables
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
-# export NVM_DIR="$HOME/.nvm"
-# [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-# [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-#
-# # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
-# export PATH="$PATH:$HOME/.rvm/bin"
+# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
+export PATH="$PATH:$HOME/.rvm/bin"
