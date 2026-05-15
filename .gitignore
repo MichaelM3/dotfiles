@@ -1,5 +1,6 @@
 # Machine-local shell env and secrets.
 **/.config/zsh/.environment.zsh
+**/.config/zsh/environment.zsh
 **/.env
 **/.env.*
 !**/.env.example
@@ -23,6 +24,7 @@
 **/.codex/generated_images/
 **/.codex/memories/
 **/.codex/models_cache.json
+**/.codex/plugins/
 **/.codex/rules/
 **/.codex/sessions/
 **/.codex/shell_snapshots/

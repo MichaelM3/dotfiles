@@ -1,5 +1,6 @@
 # ZSH config
 [ -f $HOME/.config/zsh/.environment.zsh ] && source $HOME/.config/zsh/.environment.zsh
+[ -f $HOME/.config/zsh/environment.zsh ] && source $HOME/.config/zsh/environment.zsh
 [ -f $HOME/.config/zsh/exports.zsh ] && source $HOME/.config/zsh/exports.zsh
 [ -f $HOME/.config/zsh/prompt.zsh ] && source $HOME/.config/zsh/prompt.zsh
 [ -f $HOME/.config/zsh/aliases.zsh ] && source $HOME/.config/zsh/aliases.zsh

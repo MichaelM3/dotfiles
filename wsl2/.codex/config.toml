@@ -12,6 +12,9 @@ kill_line_end = "ctrl-q"
 move_up = ["up", "ctrl-k"]
 move_down = ["down", "ctrl-j"]
 
+[tui.model_availability_nux]
+"gpt-5.5" = 1
+
 [mcp_servers.github]
 args = ["run", "-i", "--rm", "-e", "GITHUB_PERSONAL_ACCESS_TOKEN", "ghcr.io/github/github/github-mcp-server"]
 command = "docker"
@@ -22,4 +25,10 @@ enabled = true
 args = ["mcp", "gateway", "run"]
 command = "docker.exe"
 cwd = "~/"
+enabled = true
+
+[projects."/home/unbalanced/dotfiles"]
+trust_level = "trusted"
+
+[plugins."github@openai-curated"]
 enabled = true

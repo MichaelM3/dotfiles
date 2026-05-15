@@ -1,5 +1,5 @@
 #NEOVIM
-alias vim='nvim'
+alias vim='$HOME/nvim-linux-x86_64.appimage'
 alias vimrc='vim ~/.config/nvim/'
 
 #GIT
