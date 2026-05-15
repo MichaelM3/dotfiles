@@ -3,8 +3,8 @@ name: sub-agent-capabilities
 description: >-
   Global sub-agent policy for Codex. Use when a task is complex, parallelizable,
   needs planning before implementation, or benefits from model-specific agent
-  roles. Defines Orchestrator, Developer, and Researcher/Planner delegation
-  patterns with pinned GPT models and bounded spawn depth.
+  roles. Defines main-thread Orchestrator behavior plus Planner, Developer, and
+  Researcher custom agents with pinned GPT models.
 ---
 
 # Sub-Agent Capabilities
@@ -15,18 +15,21 @@ reviewable, and cheap enough to use often.
 ## Global Limits
 
 - Main thread is the Orchestrator brain: GPT-5.5, `reasoning_effort = "medium"`.
-- Maximum agent tree depth: `max_depth = 3`.
-- Maximum nested spawn depth: `max_spawn_depth = 2`.
-- If a Codex build does not enforce `max_spawn_depth` as a native config key,
-  treat it as a hard instruction-level limit.
+- Maximum agent tree depth: `max_depth = 1`.
+- Maximum concurrent agent threads: `max_threads = 3`.
+- Custom agents are standalone TOML files in `/home/unbalanced/.codex/agents/`.
+- Do not use `[agents.<role>]` tables in `config.toml`; Codex custom agents are
+  configured per file.
 - Prefer 1-3 sub-agents. Use more only when their write scopes or research
   questions are clearly independent.
+- Direct child sub-agents only. Parent Orchestrator owns delegation; child agents
+  must not spawn grandchildren unless this cap is raised for a specific task.
 - Never delegate destructive git, secrets, credentials, deployment, or external
   mutation decisions without explicit user approval.
 
 ## Roles
 
-### Orchestrator / Planner
+### Orchestrator
 
 - Model: `gpt-5.5`
 - Reasoning: `medium`
@@ -44,10 +47,24 @@ Use for:
 - Cross-layer work involving docs, tests, release notes, schemas, or APIs.
 - Deciding what to delegate and what stays on the critical path.
 
+### Planner
+
+- Model: `gpt-5.5`
+- Reasoning: `medium`
+- Agent name: `planner`
+- Produces implementation specs, task breakdowns, and risk checks.
+- Does not edit files.
+
+Use for:
+
+- Turning ambiguous requests into an ExecPlan.
+- Auditing whether a proposed implementation plan matches the repo.
+- Producing specs that a Developer can execute.
+
 ### Developer
 
 - Model: `gpt-5.3-codex`
-- Agent type: `worker`
+- Agent name: `developer`
 - Owns implementation tasks with precise file/module ownership.
 - Focuses on code precision, refactoring, tests, and local verification.
 - Must not revert unrelated edits or work owned by another agent.
@@ -70,7 +87,7 @@ files and verification result.
 ### Researcher
 
 - Model: `gpt-5.4-mini`
-- Agent type: `explorer`
+- Agent name: `researcher`
 - Performs broad codebase exploration, docs lookup, symbol/caller discovery,
   and parallel fact gathering.
 - Returns terse path:line evidence and open questions, not long prose.

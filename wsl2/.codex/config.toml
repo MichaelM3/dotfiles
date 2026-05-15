@@ -3,25 +3,8 @@ model_reasoning_effort = "medium"
 personality = "pragmatic"
 
 [agents]
-max_depth = 3
-max_spawn_depth = 2
-
-[agents.orchestrator]
-model = "gpt-5.5"
-reasoning_effort = "medium"
-
-[agents.planner]
-model = "gpt-5.5"
-reasoning_effort = "medium"
-
-[agents.developer]
-model = "gpt-5.3-codex"
-
-[agents.researcher]
-model = "gpt-5.4-mini"
-
-[features.multi_agent_v2]
-max_concurrent_threads_per_session = 3
+max_threads = 3
+max_depth = 1
 
 [tui.keymap.list]
 move_up = ["up", "ctrl-k", "k"]
@@ -34,18 +17,18 @@ move_up = ["up", "ctrl-k"]
 move_down = ["down", "ctrl-j"]
 
 [tui.model_availability_nux]
-"gpt-5.5" = 3
+"gpt-5.5" = 4
 
 [mcp_servers.github]
 args = ["run", "-i", "--rm", "-e", "GITHUB_PERSONAL_ACCESS_TOKEN", "ghcr.io/github/github/github-mcp-server"]
 command = "docker"
-cwd = "~/"
-enabled = true
+cwd = "/home/unbalanced"
+enabled = false
 
 [mcp_servers.docker]
 args = ["mcp", "gateway", "run"]
 command = "docker.exe"
-cwd = "~/"
+cwd = "/home/unbalanced"
 enabled = true
 
 [projects."/home/unbalanced/dotfiles"]

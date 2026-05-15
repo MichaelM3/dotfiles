@@ -17,4 +17,5 @@ multi-phase work. Load and follow:
 `/home/unbalanced/.codex/skills/sub-agent-capabilities/SKILL.md`
 
 Use GPT-5.5 with medium reasoning as the main Orchestrator/Planner brain. Keep
-agent trees bounded by `max_depth = 3` and `max_spawn_depth = 2`.
+agent trees bounded by `max_depth = 1`. Custom sub-agents live in
+`/home/unbalanced/.codex/agents/`.

@@ -1,20 +1,20 @@
 ---
 name: cavecrew
 description: >-
-  When to delegate work to a subagent so tool results stay caveman-terse (~60% smaller than verbose exploration). Codex: use subagents only when the user explicitly asks for delegation or parallel agent work; map investigator, builder, and reviewer presets to concrete subagent prompts. Trigger: delegate to subagent, use cavecrew, spawn investigator/builder/reviewer, save context, compressed agent output.
+  Terse subagent-output presets for investigator, builder, and reviewer work when delegation is allowed by sub-agent-capabilities. Keeps tool results caveman-terse (~60% smaller than verbose exploration). Trigger: delegate to subagent, use cavecrew, spawn investigator/builder/reviewer, save context, compressed agent output.
 ---
 
 Cavecrew = three **presets** (investigator / builder / reviewer). Goal: subagent returns compressed, structured text so main thread context lasts longer.
 
-**Invocation:** Rules and **onsched-agent-handoff** may tell the model to load this skill. Spawn Codex subagents only when the user has explicitly authorized delegation or parallel agent work. User can still invoke manually.
+**Invocation:** Load when delegation is useful and allowed by **sub-agent-capabilities**. This skill does not decide delegation policy; it only shapes concise subagent prompts/results. User can still invoke manually.
 
 **Codex Preset Mapping**
 
 | Preset | Codex use | Notes |
 |--------|-----------|--------|
-| investigator | `explorer` subagent when authorized | Locate defs, callers, tests — file:line first |
-| builder | `worker` subagent when authorized | <=2 files, surgical edit; refuse broad refactors |
-| reviewer | main thread or subagent when authorized | One-line findings; OnSched prefixes (`bug:`, `risk:`, `nit:`, `q:`) |
+| investigator | `explorer` / Researcher subagent | Locate defs, callers, tests — file:line first |
+| builder | `worker` / Developer subagent | <=2 files, surgical edit; refuse broad refactors |
+| reviewer | main thread or subagent | One-line findings; prefixes (`bug:`, `risk:`, `nit:`, `q:`) |
 
 ## When to use cavecrew vs alternatives
 
