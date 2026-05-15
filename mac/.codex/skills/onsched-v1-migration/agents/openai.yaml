@@ -1,0 +1,4 @@
+interface:
+  display_name: Onsched V1 Migration
+  short_description: Migrate legacy v1 API behavior
+  default_prompt: Use $onsched-v1-migration for the matching OnSched workflow.

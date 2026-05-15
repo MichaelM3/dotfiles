@@ -1,0 +1,4 @@
+interface:
+  display_name: Verify Plan
+  short_description: Stress-test implementation plans
+  default_prompt: Use $verify-plan for the matching OnSched workflow.

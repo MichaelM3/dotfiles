@@ -1,0 +1,84 @@
+# Machine-local shell env and secrets.
+**/.config/zsh/.environment.zsh
+**/.env
+**/.env.*
+!**/.env.example
+
+# Shell-generated state.
+**/.zcompdump*
+**/.zsh_history
+**/.zsh_sessions/
+**/*.zwc
+
+# Codex credentials, sessions, logs, caches, and generated state.
+**/.codex/auth.json
+**/.codex/history.jsonl
+**/.codex/session_index.jsonl
+**/.codex/installation_id
+**/.codex/.personality_migration
+**/.codex/version.json
+**/.codex/log/
+**/.codex/*.sqlite*
+**/.codex/cache/
+**/.codex/generated_images/
+**/.codex/memories/
+**/.codex/models_cache.json
+**/.codex/rules/
+**/.codex/sessions/
+**/.codex/shell_snapshots/
+**/.codex/tmp/
+**/.codex/.tmp/
+**/.codex/vendor_imports/
+
+# Agent skill manager state.
+**/.agents/.skill-lock.json
+**/.agents/cache/
+**/.agents/tmp/
+
+# Editor-generated state.
+**/.config/nvim/lazy-lock.json
+**/.config/nvim/.netrwhist
+**/.config/nvim/Session.vim
+**/.config/nvim/session/
+**/.config/nvim/swap/
+**/.config/nvim/undo/
+**/.config/nvim/view/
+**/.config/nvim/.luarc.json
+
+# Tmux/plugin-generated state.
+**/.tmux/resurrect/
+**/.tmux/plugins/tmux-kanagawa/data/weather.txt
+**/.tmux/plugins/tmux-kanagawa/data/.tmux-kanagawa-state
+**/.tmux/plugins/tmux/custom/
+
+# Tool credentials, telemetry, cache, and mutable local state.
+**/.config/configstore/
+**/.config/create-next-app-nodejs/
+**/.config/cursor/auth.json
+**/.config/cursor/prompt_history.json
+**/.config/cursor/*Cache*/
+**/.config/cursor/logs/
+**/.config/firebase/
+**/.config/flutter/tool_state
+**/.config/gcloud/
+**/.config/gh/hosts.yml
+**/.config/gh/cache/
+**/.config/go/telemetry/
+**/.config/lazygit/state.yml
+**/.config/nextjs-nodejs/
+**/.config/ngrok/
+**/.config/opencode/bun.lock
+**/.config/opencode/node_modules/
+**/.config/stripe/
+
+# Language/package manager output.
+**/node_modules/
+**/__pycache__/
+**/*.pyc
+
+# OS/editor junk.
+**/.DS_Store
+**/*~
+**/*.bak
+**/*.swp
+**/*.swo

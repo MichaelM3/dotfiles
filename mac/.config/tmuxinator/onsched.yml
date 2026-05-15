@@ -1,0 +1,13 @@
+---
+name: onsched
+project_root: "<%= ENV['HOME'] %>/Development/OnSched/v3"
+windows:
+  - editor:
+      layout: 1d34,188x48,0,0{112x48,0,0,0,75x48,113,0,1}
+      panes:
+        - cd "$HOME/Development/OnSched/v3" && vim .
+        - cd "$HOME/Development/OnSched/v3" && cursor agent
+  - testing:
+      layout: d07f,188x48,0,0,2
+      panes:
+        - cd "$HOME/Development/OnSched/v3"

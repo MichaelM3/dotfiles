@@ -1,0 +1,4 @@
+interface:
+  display_name: Onsched Versioning
+  short_description: Handle OnSched release artifacts
+  default_prompt: Use $onsched-versioning for the matching OnSched workflow.

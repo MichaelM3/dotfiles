@@ -1,0 +1,4 @@
+interface:
+  display_name: Onsched Gatling
+  short_description: Run OnSched Gatling availability tests
+  default_prompt: Use $onsched-gatling for the matching OnSched workflow.

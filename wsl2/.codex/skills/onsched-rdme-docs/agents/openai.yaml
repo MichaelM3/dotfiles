@@ -1,0 +1,4 @@
+interface:
+  display_name: Onsched ReadMe Docs
+  short_description: Maintain public ReadMe docs
+  default_prompt: Use $onsched-rdme-docs for the matching OnSched workflow.
