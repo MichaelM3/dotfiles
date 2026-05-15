@@ -1,6 +1,27 @@
 model = "gpt-5.5"
-model_reasoning_effort = "high"
+model_reasoning_effort = "medium"
 personality = "pragmatic"
+
+[agents]
+max_depth = 3
+max_spawn_depth = 2
+
+[agents.orchestrator]
+model = "gpt-5.5"
+reasoning_effort = "medium"
+
+[agents.planner]
+model = "gpt-5.5"
+reasoning_effort = "medium"
+
+[agents.developer]
+model = "gpt-5.3-codex"
+
+[agents.researcher]
+model = "gpt-5.4-mini"
+
+[features.multi_agent_v2]
+max_concurrent_threads_per_session = 3
 
 [tui.keymap.list]
 move_up = ["up", "ctrl-k", "k"]
