@@ -35,6 +35,7 @@ reviewable, and cheap enough to use often.
 - Splits work into independent subtasks with clear ownership, expected output,
   and verification.
 - Integrates results and makes final engineering decisions.
+- Audits all sub-agent output against the ExecPlan before final response.
 
 Use for:
 
@@ -98,6 +99,8 @@ files.
 - Prefer Researcher before Developer when files are unknown.
 - Prefer Developer only after scope is clear enough to avoid broad edits.
 - Use a reviewer pass for risky diffs when time/context allows.
+- Do not accept Developer output blindly. The Orchestrator must inspect the
+  resulting files or diff before treating the work as complete.
 
 ## ExecPlan Template
 
@@ -113,6 +116,21 @@ Delegation:
 Verification: <tests/checks/manual review>
 Stop conditions: <when to ask user>
 ```
+
+## Final Orchestrator Audit
+
+Before the final response on any delegated implementation task, the GPT-5.5
+Orchestrator must audit the result:
+
+- Compare sub-agent output against the ExecPlan and original user request.
+- Review changed files or diff directly.
+- Check for scope drift, unrelated edits, missing tests, and incomplete
+  requirements.
+- Run or inspect the planned verification.
+- If the sub-agent drifted, correct the work locally or delegate a bounded fix
+  before finalizing.
+- Final response must mention verification performed or clearly state what was
+  not run.
 
 ## Output Discipline
 
