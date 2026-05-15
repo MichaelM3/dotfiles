@@ -60,6 +60,7 @@ eval "$(pyenv init - zsh)"
 export NODE_COMPILE_CACHE=/var/tmp/openclaw-compile-cache
 export OPENCLAW_NO_RESPAWN=1
 export DOCKER_MCP_IN_CONTAINER=1
+export CODEX_HOME=$HOME/.codex
 
 # Android: use Linux SDK under WSL (Flutter/Gradle need Linux adb, aapt, etc.). Windows Studio SDK is only .exe.
 export ANDROID_HOME="$HOME/Android/Sdk"

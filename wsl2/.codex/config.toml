@@ -13,7 +13,7 @@ move_up = ["up", "ctrl-k"]
 move_down = ["down", "ctrl-j"]
 
 [tui.model_availability_nux]
-"gpt-5.5" = 2
+"gpt-5.5" = 3
 
 [mcp_servers.github]
 args = ["run", "-i", "--rm", "-e", "GITHUB_PERSONAL_ACCESS_TOKEN", "ghcr.io/github/github/github-mcp-server"]
@@ -31,6 +31,9 @@ enabled = true
 trust_level = "trusted"
 
 [projects."/home/unbalanced/.config"]
+trust_level = "trusted"
+
+[projects."/home/unbalanced/Development/OnSched/v3"]
 trust_level = "trusted"
 
 [plugins."github@openai-curated"]
