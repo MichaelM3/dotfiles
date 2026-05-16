@@ -1,5 +1,4 @@
-# My personal NVIM config.
+# 💤 LazyVim
 
-## Shoutout to Josean Martinez youtube channel
-
-Awesome lazy vim setup from josean, along with my own custom set, and remap files
+A starter template for [LazyVim](https://github.com/LazyVim/LazyVim).
+Refer to the [documentation](https://lazyvim.github.io/installation) to get started.

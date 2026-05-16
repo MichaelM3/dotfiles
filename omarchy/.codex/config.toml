@@ -1,6 +1,10 @@
 model = "gpt-5.5"
-model_reasoning_effort = "high"
+model_reasoning_effort = "medium"
 personality = "pragmatic"
+
+[agents]
+max_threads = 3
+max_depth = 1
 
 [tui.keymap.list]
 move_up = ["up", "ctrl-k", "k"]
@@ -12,14 +16,29 @@ kill_line_end = "ctrl-q"
 move_up = ["up", "ctrl-k"]
 move_down = ["down", "ctrl-j"]
 
+[tui.model_availability_nux]
+"gpt-5.5" = 4
+
 [mcp_servers.github]
 args = ["run", "-i", "--rm", "-e", "GITHUB_PERSONAL_ACCESS_TOKEN", "ghcr.io/github/github/github-mcp-server"]
 command = "docker"
-cwd = "~/"
-enabled = true
+cwd = "/home/unbalanced"
+enabled = false
 
 [mcp_servers.docker]
 args = ["mcp", "gateway", "run"]
 command = "docker"
-cwd = "~/"
+cwd = "/home/unbalanced"
+enabled = true
+
+[projects."/home/unbalanced/dotfiles"]
+trust_level = "trusted"
+
+[projects."/home/unbalanced/.config"]
+trust_level = "trusted"
+
+[projects."/home/unbalanced/Development/OnSched/v3"]
+trust_level = "trusted"
+
+[plugins."github@openai-curated"]
 enabled = true

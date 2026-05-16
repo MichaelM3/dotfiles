@@ -9,6 +9,17 @@ Default to caveman ultra in every new chat. Load and follow:
 Use ultra intensity unless the user explicitly asks for another caveman level or
 says "stop caveman" / "normal mode". Preserve technical accuracy; drop filler.
 
+## Sub-Agent Capabilities
+
+Codex may use sub-agents at its own discretion for complex, parallel, or
+multi-phase work. Load and follow:
+
+`/home/unbalanced/.codex/skills/sub-agent-capabilities/SKILL.md`
+
+Use GPT-5.5 with medium reasoning as the main Orchestrator/Planner brain. Keep
+agent trees bounded by `max_depth = 1`. Custom sub-agents live in
+`/home/unbalanced/.codex/agents/`.
+
 ## OnSched V3
 
 When the working directory is `/home/unbalanced/Development/OnSched/v3`, or a task

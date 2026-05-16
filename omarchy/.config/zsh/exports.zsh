@@ -1,5 +1,5 @@
 # Uncomment the following line to use case-sensitive completion.
-CASE_SENSITIVE="false"
+# CASE_SENSITIVE="true"
 
 zle_highlight=('paste:none')
 
@@ -8,41 +8,47 @@ plugins=(
   zsh-syntax-highlighting
   zsh-autosuggestions
   zsh-vi-mode
+  git
 )
-export ZSH="$HOME/.oh-my-zsh"
-[ -s "$ZSH/oh-my-zsh.sh" ] && source "$ZSH/oh-my-zsh.sh"
+export ZSH="/home/$USER/.oh-my-zsh"
+source $ZSH/oh-my-zsh.sh
 
-
-export EDITOR='vim'
+# export
+export TF_FORCE_GPU_ALLOW_GROWTH=true
+# Preferred editor for local and remote sessions
+ if [[ -n $SSH_CONNECTION ]]; then
+   export EDITOR='nvim'
+ else
+   export EDITOR='nvim'
+ fi
+#autoload -U colors && colors
 export CLICOLOR=1
 export FZF_DEFAULT_COMMAND='rg --files --hidden'
+#export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 export FZF_ALT_C_COMMAND="$FZF_DEFAULT_COMMAND"
 export MANPAGER='nvim +Man!'
 export MANWIDTH=999
+export PATH=/user/bin/python3.11:$PATH
+export PATH=/home/$USER/.cargo/bin:$PATH
+export PATH=/home/$USER/.local/go/bin:$PATH
+export GOPATH=$HOME/.local/go
 
+# fnm
+# eval "$(zoxide init zsh)"
+export NODE_COMPILE_CACHE=/var/tmp/openclaw-compile-cache
+# export OPENCLAW_NO_RESPAWN=1
+# export OLLAMA_API_KEY="ollama-local"
+
+# export GOROOT=/usr/local/go
 export GOROOT=/usr/lib/go
-export GOPATH="$HOME/Development/go_code"
-export PATH="$PATH:$GOROOT/bin:$GOPATH/bin"
-export PATH="$HOME/.local/bin:$HOME/.local/bin/statusbar:$PATH"
+export PATH=$PATH:/usr/lib/go/bin
+export GOPATH=~/Development/go
+export PATH=$HOME/.local/bin:$PATH
+export PATH=$HOME/.local/bin/statusbar:$PATH
 export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 
-export KUBECONFIG="$HOME/.kube/config"
-export JAVA_HOME="/usr/lib/jvm/default"
-export FIRESTORE_EMULATOR_HOST=127.0.0.1:8080
-export PATH="$HOME/Development/flutter/bin:$PATH"
-
-export PYENV_ROOT="$HOME/.pyenv"
-[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
-command -v pyenv >/dev/null 2>&1 && eval "$(pyenv init - zsh)"
-
-export NODE_COMPILE_CACHE=/var/tmp/openclaw-compile-cache
-export OPENCLAW_NO_RESPAWN=1
-export DOCKER_MCP_IN_CONTAINER=1
-
-export ANDROID_HOME="$HOME/Android/Sdk"
-export ANDROID_SDK_ROOT="$ANDROID_HOME"
-export PATH="$PATH:$ANDROID_HOME/platform-tools:$ANDROID_HOME/cmdline-tools/latest/bin"
-
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
-[ -s "$NVM_DIR/bash_completion" ] && . "$NVM_DIR/bash_completion"
+export NVM_DIR="$HOME/.config/nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
+export PATH="$PATH:$HOME/.rvm/bin"

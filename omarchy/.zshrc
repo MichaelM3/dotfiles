@@ -10,3 +10,11 @@
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 [ -f /usr/share/fzf/completion.zsh ] && source /usr/share/fzf/completion.zsh
 [ -f /usr/share/fzf/key-bindings.zsh ] && source /usr/share/fzf/key-bindings.zsh
+
+# source ~/.rvm/scripts/rvm
+
+
+[ -f "$HOME/.local/bin/env" ] && source "$HOME/.local/bin/env"
+
+# OpenClaw Completion
+# source "/home/unbalanced/.openclaw/completions/openclaw.zsh"
