@@ -1,0 +1,4 @@
+interface:
+  display_name: Onsched Architecture
+  short_description: Navigate OnSched V3 architecture
+  default_prompt: Use $onsched-architecture for the matching OnSched workflow.

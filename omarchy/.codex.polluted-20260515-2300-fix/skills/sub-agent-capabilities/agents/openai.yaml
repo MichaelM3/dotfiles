@@ -1,0 +1,4 @@
+interface:
+  display_name: Sub-Agent Capabilities
+  short_description: Role/model policy for bounded Codex sub-agents
+  default_prompt: Use $sub-agent-capabilities to plan and delegate complex work with pinned agent models.
