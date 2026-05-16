@@ -1,6 +1,7 @@
 model = "gpt-5.5"
 model_reasoning_effort = "medium"
 personality = "pragmatic"
+approvals_reviewer = "user"
 
 [agents]
 max_threads = 3
@@ -31,14 +32,32 @@ command = "docker"
 cwd = "/home/unbalanced"
 enabled = true
 
-[projects."/home/unbalanced/dotfiles"]
+[projects."/home/unbalanced"]
+trust_level = "trusted"
+
+[projects."/home/unbalanced/.codex"]
 trust_level = "trusted"
 
 [projects."/home/unbalanced/.config"]
 trust_level = "trusted"
 
-[projects."/home/unbalanced/Development/OnSched/v3"]
+[projects."/home/unbalanced/dotfiles"]
+trust_level = "trusted"
+
+[projects."/home/unbalanced/Work/lazyslack"]
 trust_level = "trusted"
 
 [plugins."github@openai-curated"]
+enabled = true
+
+[plugins."linear@openai-curated"]
+enabled = true
+
+[plugins."google-calendar@openai-curated"]
+enabled = true
+
+[plugins."gmail@openai-curated"]
+enabled = true
+
+[plugins."notion@openai-curated"]
 enabled = true

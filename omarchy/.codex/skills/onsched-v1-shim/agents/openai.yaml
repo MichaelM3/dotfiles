@@ -1,4 +1,0 @@
-interface:
-  display_name: Onsched V1 Shim
-  short_description: Maintain v1 alias shim compatibility
-  default_prompt: Use $onsched-v1-shim for the matching OnSched workflow.

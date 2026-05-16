@@ -1,4 +1,4 @@
 interface:
   display_name: Caveman Compress
   short_description: Compress memory markdown safely
-  default_prompt: Use $caveman-compress for the matching OnSched workflow.
+  default_prompt: Use $caveman-compress to shorten prose while preserving protected technical regions.

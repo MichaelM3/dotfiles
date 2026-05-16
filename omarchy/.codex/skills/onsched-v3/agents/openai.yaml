@@ -1,4 +1,0 @@
-interface:
-  display_name: OnSched V3
-  short_description: Native OnSched V3 Codex project rules
-  default_prompt: Use $onsched-v3 for native OnSched V3 repo guidance.

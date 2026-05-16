@@ -1,4 +1,0 @@
-interface:
-  display_name: Onsched Mocha API Tests
-  short_description: Write and run Mocha API tests
-  default_prompt: Use $onsched-mocha-api-tests for the matching OnSched workflow.

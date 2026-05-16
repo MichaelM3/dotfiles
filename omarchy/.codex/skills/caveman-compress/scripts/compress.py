@@ -47,8 +47,7 @@ SENSITIVE_NAME_TOKENS = (
 
 AGENT_ONLY_MESSAGE = (
     "Scripted compression needs OPENAI_API_KEY (optional scripted mode). "
-    "Otherwise use Cursor Agent with "
-    ".cursor/skills/caveman-compress/SKILL.md — compress prose there; no API key."
+    "Otherwise use the caveman-compress skill directly in the agent session; no API key."
 )
 
 

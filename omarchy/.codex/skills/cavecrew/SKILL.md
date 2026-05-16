@@ -1,85 +1,73 @@
 ---
 name: cavecrew
-description: >-
-  Terse subagent-output presets for investigator, builder, and reviewer work when delegation is allowed by sub-agent-capabilities. Keeps tool results caveman-terse (~60% smaller than verbose exploration). Trigger: delegate to subagent, use cavecrew, spawn investigator/builder/reviewer, save context, compressed agent output.
+description: Token-efficient delegation and agent-handoff patterns for Codex subagents. Use when the user explicitly asks to delegate, spawn subagents, use cavecrew, save context with agents, or coordinate investigator/builder/reviewer handoffs.
 ---
 
-Cavecrew = three **presets** (investigator / builder / reviewer). Goal: subagent returns compressed, structured text so main thread context lasts longer.
+# Cavecrew
 
-**Invocation:** Load when delegation is useful and allowed by **sub-agent-capabilities**. This skill does not decide delegation policy; it only shapes concise subagent prompts/results. User can still invoke manually.
+Use only when subagents are allowed by the user or current instructions. Keep
+main thread responsible for plan, integration, and final verification.
 
-**Codex Preset Mapping**
+Goal: subagent results stay compact enough to preserve main-thread context.
+Prefer path-first facts over prose.
 
-| Preset | Codex use | Notes |
-|--------|-----------|--------|
-| investigator | `explorer` / Researcher subagent | Locate defs, callers, tests — file:line first |
-| builder | `worker` / Developer subagent | <=2 files, surgical edit; refuse broad refactors |
-| reviewer | main thread or subagent | One-line findings; prefixes (`bug:`, `risk:`, `nit:`, `q:`) |
+## Roles
 
-## When to use cavecrew vs alternatives
+- Investigator: locate definitions, callers, tests, errors, or relevant files. Output path-first facts.
+- Builder: make a bounded edit in known files. Best for 1-2 files with clear ownership.
+- Reviewer: inspect a diff or touched files for bugs and missing verification.
 
-| Task | Use |
-|---|---|
-| Where is X / what calls Y / list uses of Z | investigator preset |
-| Same + architecture essay | Main thread or verbose subagent prompt |
-| Surgical edit, ≤2 files, scope obvious | builder preset |
-| New feature / 3+ files / cross-cutting refactor | Main thread; split work |
-| Review diff for bugs | reviewer preset |
-| Deep review + long rationale | normal prose review, not cavecrew |
-| One-line answer you know | Main thread, no subagent |
+## When To Delegate
 
-Rule of thumb: **want ~1/3 tokens in tool result → cavecrew. Want prose → normal prose or inline.**
+- Use investigator for broad search that can run beside local work.
+- Use builder for independent edits with disjoint write scope.
+- Use reviewer after implementation while main thread continues verification.
+- Keep blocking, tightly coupled, or high-judgment work in main thread.
+- Use normal prose when the user needs explanation, tradeoffs, or architecture commentary.
 
-## Why this exists (the real win)
+## Output Contracts
 
-Subagent tool results inject verbatim into main context. Verbose exploration burns budget; terse path:line lists cost less per delegation.
+Ask investigators for:
 
-## Output contracts
-
-What main thread can rely on per agent:
-
-**`cavecrew-investigator`**
+```text
+Findings:
+- path:line - `symbol` - note
+totals: ...
 ```
-<Header>:
-- path:line — `symbol` — short note
-totals: <counts>.
+
+Ask builders for:
+
+```text
+changed:
+- path - summary
+verified: command/result or not run
+blocked: none|reason
 ```
-Or `No match.` Always file-path-first, line-number-attached, backticked symbols. Safe to grep with `path:\d+`.
 
-**`cavecrew-builder`**
+Ask reviewers for:
+
+```text
+path:line: severity: problem. fix.
+totals: ...
 ```
-<path:line-range> — <change ≤10 words>.
-verified: <re-read OK | mismatch @ path:line>.
-```
-Or one of: `too-big.` / `needs-confirm.` / `ambiguous.` / `regressed.` (terminal first token).
 
-**`cavecrew-reviewer`**
-```
-path:line: <severity>: <problem>. <fix>.
-totals: Nbug Nrisk Nnit Nq
-```
-(`severity` = `bug` | `risk` | `nit` | `q`.) Or `No issues.` Findings sorted file → line ascending.
+## Chaining
 
-## Chaining patterns
+- Locate -> fix -> verify: investigator returns sites, builder edits selected files, reviewer audits diff.
+- Parallel scout: spawn separate investigators for definitions, callers, and tests.
+- Single-shot edit: skip investigator only when exact files are already known.
 
-**Locate → fix → verify** (most common):
-1. `cavecrew-investigator` returns site list.
-2. Main thread picks 1-2 sites, hands paths to `cavecrew-builder`.
-3. `cavecrew-reviewer` audits the diff.
+## Avoid
 
-**Parallel scout** (when investigation is broad):
-Spawn 2-3 `cavecrew-investigator` calls in one message (different angles: defs vs callers vs tests). Aggregate in main thread.
+- Do not send builder broad refactors or unknown file ownership.
+- Do not chain investigator -> builder for 3+ file features; split work first.
+- Do not ask reviewer for general feedback. It returns findings only.
+- Paraphrase terse output before showing it directly to humans.
 
-**Single-shot edit** (when site is already known):
-Skip investigator. Hand exact path:line to `cavecrew-builder` directly.
+## Main Thread Duties
 
-## What NOT to do
-
-- Don't use `cavecrew-builder` when you don't already know the file. Spawn investigator first or main thread will eat tokens passing context.
-- Don't chain `cavecrew-investigator → cavecrew-builder` for a 5-file refactor. Builder will return `too-big.` and you'll have wasted a turn.
-- Don't ask `cavecrew-reviewer` for "general feedback" — findings only, no architecture opinions. Use verbose main-thread review instead.
-- Don't expect prose. Cavecrew output is structured, sometimes terse to the point of cryptic. If a human will read it directly, paraphrase.
-
-## Auto-clarity (inherited)
-
-Subagents drop caveman → normal English for security warnings, irreversible-action confirmations, and any output where fragment ambiguity could be misread. Resume caveman after.
+1. Define concrete task and ownership.
+2. Tell workers they are not alone in the codebase and must not revert others' edits.
+3. Avoid duplicate assignments.
+4. Review returned changes before relying on them.
+5. Integrate results into one coherent final answer.
