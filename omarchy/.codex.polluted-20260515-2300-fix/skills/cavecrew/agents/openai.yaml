@@ -1,4 +1,0 @@
-interface:
-  display_name: Cavecrew
-  short_description: Terse Codex delegation presets
-  default_prompt: Use $cavecrew for the matching OnSched workflow.

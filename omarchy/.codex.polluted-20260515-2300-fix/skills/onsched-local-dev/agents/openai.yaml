@@ -1,4 +1,0 @@
-interface:
-  display_name: Onsched Local Dev
-  short_description: Run local OnSched dev services
-  default_prompt: Use $onsched-local-dev for the matching OnSched workflow.

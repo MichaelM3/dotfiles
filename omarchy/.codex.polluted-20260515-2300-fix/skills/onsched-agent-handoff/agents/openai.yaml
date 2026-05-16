@@ -1,4 +1,0 @@
-interface:
-  display_name: Onsched Agent Handoff
-  short_description: Finish cross-layer OnSched changes
-  default_prompt: Use $onsched-agent-handoff for the matching OnSched workflow.

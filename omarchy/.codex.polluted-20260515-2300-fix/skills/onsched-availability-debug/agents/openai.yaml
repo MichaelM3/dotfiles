@@ -1,4 +1,0 @@
-interface:
-  display_name: Onsched Availability Debug
-  short_description: Debug OnSched availability behavior
-  default_prompt: Use $onsched-availability-debug for the matching OnSched workflow.
