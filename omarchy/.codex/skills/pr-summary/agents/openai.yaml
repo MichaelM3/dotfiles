@@ -1,6 +1,0 @@
-interface:
-  display_name: PR Summary
-  short_description: Create or update GitHub PRs
-  default_prompt: Use $pr-summary to draft or open a concise PR from the current branch.
-policy:
-  allow_implicit_invocation: false

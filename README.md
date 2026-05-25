@@ -1,24 +1,42 @@
 # Dotfiles
 
-Portable configs split by target OS:
+Layered personal dotfiles for WSL2, macOS, and Omarchy.
 
-- `wsl2/`
-- `mac/`
-- `omarchy/`
+## Layout
 
-Files that normally live in `$HOME` are stored at OS dir root. Files that normally live in `$HOME/.config` are stored under each OS dir `.config/`.
+```text
+shared/home/              # managed files installed for every profile
+shared/portable/home/     # managed files shared by WSL2 and macOS
+shared/codex/             # Codex config fragments rendered at install time
+profiles/<profile>/home/  # profile-specific managed files
+profiles/<profile>/codex/ # profile-specific Codex config fragments
+```
+
+`home/` directories mirror `$HOME`. The installer creates real directories in
+`$HOME` and symlinks managed leaf files inside them.
+
+Stateful directories stay local and real:
+
+- `$HOME/.codex`
+- `$HOME/.agents`
+- `$HOME/.cursor`
+- `$HOME/.config`
+- `$HOME/.tmux`
+
+That keeps credentials, sessions, caches, generated files, downloaded plugins,
+and lock files out of Git.
 
 ## New Machine
 
 ```bash
 git clone <repo-url> ~/dotfiles
 cd ~/dotfiles
-cp <os>/.config/zsh/.environment.zsh.example <os>/.config/zsh/.environment.zsh
-$EDITOR <os>/.config/zsh/.environment.zsh
-./install.sh <os>
+cp shared/home/.config/zsh/.environment.zsh.example ~/.config/zsh/.environment.zsh
+$EDITOR ~/.config/zsh/.environment.zsh
+./install.sh <profile>
 ```
 
-Use one of:
+Profiles:
 
 ```bash
 ./install.sh wsl2
@@ -29,42 +47,43 @@ Use one of:
 Preview first:
 
 ```bash
-./install.sh <os> --dry-run
+./install.sh <profile> --dry-run
 ```
 
-Overwrite existing files instead of backing them up:
+Overwrite instead of backing up:
 
 ```bash
-./install.sh <os> --force
+./install.sh <profile> --force
 ```
 
-By default, existing real files move to `~/.dotfiles-backup/<timestamp>/`.
+Default behavior moves existing files to `~/.dotfiles-backup/<timestamp>/`.
 
-## Environment
+## Codex
 
-`zsh/.environment.zsh` is ignored by git. Put machine-local values there:
+Codex runtime state is local. The repo tracks:
 
-- API keys and tokens
-- SDK paths
-- local `PATH` entries
-- `JAVA_HOME`, `ANDROID_HOME`, `KUBECONFIG`
-- private aliases with credentials
+- shared harness instructions and skills under `shared/home/.agents`
+- Codex `AGENTS.md` under `shared/home/.codex/AGENTS.md`
+- Codex config fragments under `shared/codex` and `profiles/<profile>/codex`
 
-Tracked zsh files source `.environment.zsh` first, then load shared shell config, prompt, aliases, functions, and `fnm`.
+`install.sh` renders `$HOME/.codex/config.toml` from those fragments. It does
+not symlink the whole `.codex` directory.
 
-## Included Configs
+## Generated Files
 
-Current live WSL2 configs were used as source of truth. Portable tracked configs include:
+Do not track:
 
-- `.zshrc`
-- `.tmux.conf`
-- `.tmux/`
-- `.codex/` global instructions, sanitized config, skills
-- `.agents/`
-- `.config/zsh/`
-- `.config/nvim/`
-- `.config/lazygit/`
-- `.config/tmuxinator/`
-- `.config/opencode/` without `node_modules`
+- Codex auth, logs, SQLite DBs, sessions, plugins, system skills, and caches
+- tmux plugins and resurrect state
+- Neovim lock/cache/session files
+- tool credentials under `.config`
+- `node_modules`, package locks generated inside tool config dirs
 
-Credential/cache dirs like `gcloud`, `gh/hosts.yml`, `firebase`, `ngrok`, `stripe`, Codex auth/log DBs, and tool caches are intentionally ignored.
+Legacy top-level `wsl2/`, `mac/`, and `omarchy/` directories are ignored so
+old local symlink targets and caches can remain on disk during migration.
+
+## Verify
+
+```bash
+scripts/audit-agent-harness.sh
+```

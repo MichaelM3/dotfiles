@@ -1,8 +1,0 @@
-# Copy to environment.zsh or .environment.zsh and fill machine-local secrets.
-# Keep public shell exports in exports.zsh.
-
-# export ANTHROPIC_API_KEY=
-# export PERPLEXITY_API_KEY=
-# export MORPH_API_KEY=
-# export CURSOR_API_KEY=
-# export GITHUB_PERSONAL_ACCESS_TOKEN=

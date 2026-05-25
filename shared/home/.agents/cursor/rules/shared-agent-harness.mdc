@@ -1,0 +1,20 @@
+---
+description: Load the shared agent harness guide for every Cursor chat.
+alwaysApply: true
+---
+
+# Shared Agent Harness
+
+Load and follow:
+
+`/home/unbalanced/.agents/AGENTS.md`
+
+Use Cursor adapter skills from:
+
+`/home/unbalanced/.agents/cursor/skills/`
+
+Use shared custom agents from:
+
+`/home/unbalanced/.agents/cursor/agents/`
+
+Cursor-specific runtime state stays in `/home/unbalanced/.cursor/`.

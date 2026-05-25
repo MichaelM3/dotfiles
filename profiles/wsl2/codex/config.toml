@@ -1,0 +1,27 @@
+[tui.model_availability_nux]
+"gpt-5.5" = 4
+
+[mcp_servers.github]
+args = ["run", "-i", "--rm", "-e", "GITHUB_PERSONAL_ACCESS_TOKEN", "ghcr.io/github/github/github-mcp-server"]
+command = "docker"
+cwd = "/home/unbalanced"
+enabled = false
+
+[mcp_servers.docker]
+args = ["mcp", "gateway", "run"]
+command = "docker.exe"
+cwd = "/home/unbalanced"
+enabled = true
+
+[projects."/home/unbalanced/dotfiles"]
+trust_level = "trusted"
+
+[projects."/home/unbalanced/.config"]
+trust_level = "trusted"
+
+[projects."/home/unbalanced/Development/OnSched/v3"]
+trust_level = "trusted"
+
+[plugins."github@openai-curated"]
+enabled = true
+
