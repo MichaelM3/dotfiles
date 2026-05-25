@@ -18,6 +18,7 @@ alias zsource='source ~/.zshrc'
 alias tmuxconfig='vim ~/.tmux.conf'
 alias tmux='TERM=screen-256color-bce tmux'
 alias onsched='tmuxinator onsched'
+alias turbot='tmuxinator turbo'
 
 # Package managers
 alias pn='pnpm'
@@ -25,4 +26,4 @@ alias pn='pnpm'
 # Misc
 alias q='exit'
 alias catalias='cat ~/.config/zsh/aliases.zsh'
-
+alias codex='export CODEX_HOME=$HOME/.codex && codex'
