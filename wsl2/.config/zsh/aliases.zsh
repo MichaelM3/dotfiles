@@ -18,6 +18,7 @@ alias zsource='source ~/.zshrc'
 alias tmuxconfig='vim ~/.tmux.conf'
 alias tmux='TERM=screen-256color-bce tmux'
 alias onsched='tmuxinator onsched'
+alias turbot='tmuxinator turbo'
 
 #PACKAGE MANAGERS
 alias pn='pnpm'
@@ -33,3 +34,4 @@ alias macremote='ssh unbalanced@192.168.0.77'
 alias wslup='sudo apt update && sudo apt upgrade -y'
 alias q='exit'
 alias catalias='cat ~/.config/zsh/aliases.zsh'
+alias codex='export CODEX_HOME=$HOME/.codex && codex'
