@@ -5,9 +5,9 @@ description: Stress-test a plan against project domain language and recorded dec
 
 # Grill With Docs
 
-Interview relentlessly until the plan is precise. Ask one question at a time
-and provide the recommended answer with each question. If code can answer the
-question, inspect code instead of asking.
+Interview relentlessly until the plan is precise. Ask one question at a time,
+wait for feedback before continuing, and provide the recommended answer with
+each question. If code can answer the question, inspect code instead of asking.
 
 ## Project Docs
 
@@ -25,6 +25,13 @@ context docs before writing. New artifacts go only under `PROJECT_ROOT/.agents`.
   term is resolved. Do not batch glossary updates.
 - Offer ADRs only for decisions that are hard to reverse, surprising without
   context, and real trade-offs.
+
+## Closing The Session
+
+- Do not auto-implement after the last grilling question.
+- End with the final spec or plan from the session.
+- Split the plan into phases when that improves delegation or sequencing.
+- Ask whether to implement, start phase 1, or hand off to subagents.
 
 ## Glossary Rules
 

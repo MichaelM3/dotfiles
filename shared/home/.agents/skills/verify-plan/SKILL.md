@@ -1,6 +1,6 @@
 ---
 name: verify-plan
-description: Verify an implementation plan against repo evidence before editing.
+description: Verify an implementation plan against repo evidence before editing. Use when a plan exists and should be checked against actual files, tests, commands, or constraints before implementation.
 ---
 
 # Verify Plan

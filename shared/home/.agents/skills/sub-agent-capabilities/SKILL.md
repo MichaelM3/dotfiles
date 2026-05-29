@@ -1,41 +1,35 @@
 ---
 name: sub-agent-capabilities
-description: >-
-  Global sub-agent policy for Codex. Use for complex, parallelizable, or
-  multi-phase work when delegation is explicitly allowed by the active runtime.
+description: Bounded delegation policy. Use when work is complex, parallelizable, or multi-phase and the user/session explicitly allows subagents.
 ---
 
 # Sub-Agent Capabilities
 
-Goal: use right model for right work while keeping delegation bounded.
+Goal: improve outcomes without losing main-thread control or context budget.
 
-## Global Limits
+## Limits
 
-- Main thread Orchestrator: GPT-5.5, `reasoning_effort = "high"`.
-- Maximum agent tree depth: `max_depth = 1`.
-- Maximum concurrent agent threads: `max_threads = 3`.
-- Codex custom agents live in `/home/unbalanced/.agents/codex/agents/`.
-- Prefer 1-3 sub-agents.
-- Never delegate destructive git, secrets, credentials, deploys, or external
-  mutation decisions without explicit user approval.
+- Parent/main thread owns plan, integration, judgment, and final answer.
+- Keep delegation depth at 1.
+- Prefer 1-3 concurrent children.
+- Delegate only bounded work with clear inputs, outputs, and ownership.
+- Never delegate destructive git, secrets, credentials, deploys, or external mutation decisions without explicit user approval.
 
-## Roles
+## Good Delegation Targets
 
-- `planner`: GPT-5.5, high reasoning, read-only planning/spec/risk checks.
-- `coder`: GPT-5.3-Codex, xhigh reasoning, scoped code edits/tests.
-- `researcher`: GPT-5.4-mini, medium reasoning, read-only search/evidence.
-- `reviewer`: GPT-5.5, medium reasoning, read-only static review.
-- `verifier`: GPT-5.4-mini, medium reasoning, read-only tests/repro proof.
-- `documentor`: GPT-5.4-mini, medium reasoning, docs/ADR/release updates.
+- Read-only code/docs discovery.
+- Focused implementation in known files or disjoint write scopes.
+- Independent verification or repro attempts.
+- Static review of an existing diff.
+- Docs/ADR/release-note updates with clear scope.
 
-## Delegation Rules
+## Avoid
 
-- Delegate only independent side work that can run while main thread progresses.
-- Keep urgent blockers local.
-- Use disjoint write scopes for concurrent coder agents.
-- Parent orchestrator audits sub-agent output before final answer.
+- Vague “look around” tasks.
+- Broad refactors without ownership boundaries.
+- Parallel writers touching overlapping files.
+- Child agents spawning more children.
 
-## Output
+## Output Contract
 
-Sub-agent results stay compact: paths, findings, changed files, verification,
-blockers.
+Require compact results: paths, findings, changed files, commands run, verdict, blockers.

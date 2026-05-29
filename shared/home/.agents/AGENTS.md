@@ -50,18 +50,15 @@ Load and follow:
 
 `/home/unbalanced/.agents/skills/sub-agent-capabilities/SKILL.md`
 
-Use GPT-5.5 with high reasoning as the main Orchestrator brain. Keep
-agent trees bounded by `max_depth = 1`. Codex custom sub-agents live in
-`/home/unbalanced/.agents/codex/agents/`.
-
-Use `cavecrew` only when the user explicitly allows subagents or asks for
-delegation. Keep delegated tasks bounded and outputs path-first.
+Keep agent trees bounded by depth 1. Use `cavecrew` only when the user
+explicitly allows subagents or asks for delegation. Keep delegated tasks
+bounded and outputs path-first.
 
 ## Skill Map
 
 - Terse mode: `caveman`.
 - Compressed sub-agent output: `cavecrew`.
-- Codex orchestration: `codex-mini-orchestrate`.
+- Harness-specific orchestration only on explicit request: `codex-mini-orchestrate`.
 - Commit generation: `generate-commits`.
 - PR summaries: `pr-summary`.
 - Sub-agent policy: `sub-agent-capabilities`.
@@ -70,9 +67,8 @@ delegation. Keep delegated tasks bounded and outputs path-first.
 - Test-first work: `tdd`.
 - Refactoring and system shape: `architecture`.
 - Architecture compatibility name: `improve-codebase-architecture`.
-- PRDs, plans, issues, grilling: `planning`, `to-prd`, `to-issues`,
+- Planning router: `planning`; focused planning: `to-prd`, `to-issues`,
   `grill-me`, `grill-with-docs`, `zoom-out`.
-- Matt-style project setup: `setup-matt-pocock-skills`.
 - Issue readiness: `triage`.
 - Throwaway exploration: `prototype`.
 - Handoffs: `handoff`.

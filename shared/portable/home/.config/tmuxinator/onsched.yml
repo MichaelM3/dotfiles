@@ -6,7 +6,7 @@ windows:
       layout: 1d34,188x48,0,0{112x48,0,0,0,75x48,113,0,1}
       panes:
         - cd "$HOME/Development/OnSched/v3" && vim .
-        - cd "$HOME/Development/OnSched/v3" && cursor agent
+        - cd "$HOME/Development/OnSched/v3" && pi
   - testing:
       layout: d07f,188x48,0,0,2
       panes:
