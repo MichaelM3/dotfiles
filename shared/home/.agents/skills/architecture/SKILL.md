@@ -9,6 +9,9 @@ description: Review and improve codebase architecture with deep modules, domain 
 
 Follow `/home/unbalanced/.agents/instructions/project-artifacts.md`. Read relevant domain docs, ADRs, and compatibility docs before recommending changes.
 
+Use `/home/unbalanced/.agents/skills/codebase-design/SKILL.md` for vocabulary,
+deep modules, seams, adapters, and testability.
+
 Use references only when needed:
 
 - `references/LANGUAGE.md`
@@ -18,13 +21,8 @@ Use references only when needed:
 
 ## Vocabulary
 
-- Module: unit with interface and implementation.
-- Interface: everything callers must know: types, invariants, errors, ordering, config, side effects.
-- Implementation: code behind the interface.
-- Deep module: small interface, substantial hidden behavior.
-- Shallow module: interface nearly as complex as implementation.
-- Seam: place behavior can vary without editing callers.
-- Adapter: concrete implementation behind a seam.
+Use the canonical vocabulary from `codebase-design`: module, interface,
+implementation, depth, seam, adapter, leverage, and locality.
 
 ## Review Process
 

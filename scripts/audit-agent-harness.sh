@@ -78,6 +78,10 @@ require_dir "$cursor_root/agents"
 require_dir "$cursor_root/rules"
 require_dir "$codex_agents"
 
+while IFS= read -r link; do
+  fail "broken symlink in shared agent harness: $link -> $(readlink "$link")"
+done < <(find "$shared_root" -xtype l -print)
+
 if [[ -e "$shared_skills/mini-orchestrate" || -L "$shared_skills/mini-orchestrate" ]]; then
   fail "mini-orchestrate is exposed through shared Codex-visible skills: $shared_skills/mini-orchestrate"
 fi

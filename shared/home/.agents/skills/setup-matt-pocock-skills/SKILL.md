@@ -1,11 +1,12 @@
 ---
 name: setup-matt-pocock-skills
-description: Scaffold Matt Pocock-style per-repo skill config under PROJECT_ROOT/.agents for issue tracking, triage labels, and domain docs. Use before first use of to-prd, to-issues, triage, grill-with-docs, diagnose, tdd, architecture, or zoom-out in a repo, or when those skills lack tracker/domain context.
+description: Scaffold Matt Pocock-style per-repo skill config under PROJECT_ROOT/.agents for issue tracking, triage labels, and domain docs. Use before first use of to-prd, to-issues, triage, grill-with-docs, diagnosing-bugs, tdd, architecture, or implement in a repo.
+disable-model-invocation: true
 ---
 
 # Setup Matt Pocock Skills
 
-Prompt-driven setup for shared Codex/Cursor skills. Explore, show findings,
+Prompt-driven setup for shared agent skills. Explore, show findings,
 ask one decision at a time, then write only after confirmation.
 
 ## Project Root
@@ -21,6 +22,7 @@ Read what already exists:
 
 - `git remote -v` and `.git/config`
 - `AGENTS.md`
+- `CLAUDE.md`
 - `.agents/issue-tracker.md`
 - `.agents/triage-labels.md`
 - `.agents/domain.md`

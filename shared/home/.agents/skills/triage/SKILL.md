@@ -33,7 +33,8 @@ Use `.agents/triage-labels.md` mapping when present.
 2. Inspect relevant code/docs. For bugs, attempt reproduction before asking product questions.
 3. Summarize understanding, likely area, missing facts.
 4. Recommend one state with reasoning.
-5. If decisions are missing, use `grill-with-docs`.
+5. If decisions are missing, use `grilling` and `domain-modeling`, or
+   `grill-with-docs` when the user wants the combined flow.
 6. Apply outcome through the configured tracker.
 
 ## Outcome Actions

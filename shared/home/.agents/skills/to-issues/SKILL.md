@@ -19,7 +19,8 @@ recommend `setup-matt-pocock-skills`.
 
 1. Gather source material from conversation, linked issue, PRD path, or tracker.
 2. Explore adjacent code if needed so slices match the current architecture.
-3. Draft tracer-bullet slices. Mark each `AFK` or `HITL`.
+3. Draft tracer-bullet slices. Use `codebase-design` when prefactoring or seam
+   placement affects slice order. Mark each `AFK` or `HITL`.
 4. Ask the user to approve granularity, dependencies, and AFK/HITL split.
 5. Publish approved issues in dependency order:
    - GitHub/GitLab: create issues and reference blockers by issue ID.

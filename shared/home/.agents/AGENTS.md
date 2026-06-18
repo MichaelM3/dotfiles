@@ -63,17 +63,23 @@ bounded and outputs path-first.
 - PR summaries: `pr-summary`.
 - Sub-agent policy: `sub-agent-capabilities`.
 - Plan checks: `verify-plan`.
-- Debugging: `diagnose`.
+- Matt-style flow router: `ask-matt`.
+- Implementation flow: `implement`; review flow: `review`.
+- Debugging: `diagnosing-bugs`; compatibility name: `diagnose`.
 - Test-first work: `tdd`.
-- Refactoring and system shape: `architecture`.
+- Domain docs: `domain-modeling`.
+- Refactoring and system shape: `architecture`, `codebase-design`.
 - Architecture compatibility name: `improve-codebase-architecture`.
+- Thermonuclear code quality review: `thermo-nuclear-code-quality-review`.
 - Planning router: `planning`; focused planning: `to-prd`, `to-issues`,
-  `grill-me`, `grill-with-docs`, `zoom-out`.
+  `grill-me`, `grilling`, `grill-with-docs`, `zoom-out`.
 - Issue readiness: `triage`.
 - Throwaway exploration: `prototype`.
 - Handoffs: `handoff`.
-- Skill writing: `skill-authoring`, `write-a-skill`.
+- Skill writing: `skill-authoring`, `writing-great-skills`, `write-a-skill`.
 - Skill discovery: `find-skills`.
+- Teaching: `teach`.
+- Merge/rebase conflicts: `resolving-merge-conflicts`.
 - Misc repo tools: `git-guardrails-claude-code`, `migrate-to-shoehorn`,
   `scaffold-exercises`, `setup-pre-commit`.
 - Caveman variants: `caveman-review`, `caveman-commit`,

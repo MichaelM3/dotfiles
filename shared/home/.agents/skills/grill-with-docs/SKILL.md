@@ -5,22 +5,23 @@ description: Stress-test a plan against project domain language and recorded dec
 
 # Grill With Docs
 
-Interview relentlessly until the plan is precise. Ask one question at a time,
-wait for feedback before continuing, and provide the recommended answer with
-each question. If code can answer the question, inspect code instead of asking.
+Run `grilling` and `domain-modeling` together: interview until the plan is
+precise while updating project domain language and ADRs inline.
+
+Load and follow:
+
+- `/home/unbalanced/.agents/skills/grilling/SKILL.md`
+- `/home/unbalanced/.agents/skills/domain-modeling/SKILL.md`
 
 ## Project Docs
 
 Follow `/home/unbalanced/.agents/instructions/project-artifacts.md`.
 Resolve `PROJECT_ROOT` first. Read existing `.agents` docs and legacy root
-context docs before writing. New artifacts go only under `PROJECT_ROOT/.agents`.
+context docs before writing. New artifacts go only under `PROJECT_ROOT/.agents`,
+never under `/home/unbalanced/.agents`.
 
 ## During The Session
 
-- Challenge glossary conflicts immediately.
-- Sharpen fuzzy or overloaded terms into one canonical term.
-- Stress-test relationships with concrete scenarios and edge cases.
-- Cross-check claims against code and surface contradictions.
 - Update `.agents/CONTEXT.md` or the relevant context glossary inline when a
   term is resolved. Do not batch glossary updates.
 - Offer ADRs only for decisions that are hard to reverse, surprising without
@@ -35,7 +36,7 @@ context docs before writing. New artifacts go only under `PROJECT_ROOT/.agents`.
 
 ## Glossary Rules
 
-Use `references/CONTEXT-FORMAT.md`.
+Use `/home/unbalanced/.agents/skills/domain-modeling/references/CONTEXT-FORMAT.md`.
 
 - Glossaries define domain language only, not implementation plans.
 - Create `.agents/CONTEXT.md` only when the first term is resolved.
@@ -46,7 +47,7 @@ Use `references/CONTEXT-FORMAT.md`.
 
 ## ADR Rules
 
-Use `references/ADR-FORMAT.md`.
+Use `/home/unbalanced/.agents/skills/domain-modeling/references/ADR-FORMAT.md`.
 
 - Create `.agents/adr/` or `.agents/contexts/<context-slug>/adr/` only when
   the first ADR is accepted.

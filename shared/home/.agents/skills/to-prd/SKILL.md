@@ -20,7 +20,8 @@ run or recommend `setup-matt-pocock-skills`.
 1. Explore the repo enough to describe the current system accurately.
 2. Use project glossary vocabulary and respect ADRs.
 3. Identify major modules likely to change. Look for deep module opportunities:
-   small interface, substantial implementation, good test surface.
+   small interface, substantial implementation, good test surface. Use
+   `codebase-design` for seam vocabulary.
 4. Write the PRD.
 5. Publish through the configured tracker:
    - GitHub/GitLab: create an issue.
