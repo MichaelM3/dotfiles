@@ -5,6 +5,33 @@ return {
 		local lualine = require("lualine")
 		local lazy_status = require("lazy.status") -- to configure lazy pending updates count
 
+		local neocodeium_symbols = {
+			status = {
+				[0] = "󰚩",
+				[1] = "󱚧",
+				[2] = "󱙻",
+				[3] = "󱙺",
+				[4] = "󱙺",
+				[5] = "󱚠",
+				[6] = "󱚠",
+			},
+			server_status = {
+				[0] = "󰣺",
+				[1] = "󰣻",
+				[2] = "󰣽",
+			},
+		}
+
+		local function neocodeium_status()
+			local ok, neocodeium = pcall(require, "neocodeium")
+			if not ok then
+				return ""
+			end
+			local status, server_status = neocodeium.get_status()
+			return neocodeium_symbols.status[status]
+				.. neocodeium_symbols.server_status[server_status]
+		end
+
 		local colors = {
 			blue = "#8ba4b0",
 			green = "#8a9a7b",
@@ -56,6 +83,10 @@ return {
 			},
 			sections = {
 				lualine_x = {
+					{
+						neocodeium_status,
+						color = { fg = "#c4b28a" },
+					},
 					{
 						lazy_status.updates,
 						cond = lazy_status.has_updates,

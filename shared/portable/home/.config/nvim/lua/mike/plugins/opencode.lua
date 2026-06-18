@@ -6,7 +6,7 @@ return {
 			-- `snacks.nvim` integration is recommended, but optional
 			---@module "snacks" <- Loads `snacks.nvim` types for configuration intellisense
 			"folke/snacks.nvim",
-			optional = true,
+			optional = false,
 			opts = {
 				input = {}, -- Enhances `ask()`
 				picker = { -- Enhances `select()`
@@ -27,11 +27,32 @@ return {
 		},
 	},
 	config = function()
+		local opencode_cmd = "opencode --port"
+		---@type snacks.terminal.Opts
+		local snacks_terminal_opts = {
+			win = {
+				position = "right",
+				enter = false,
+				on_win = function(win)
+					require("opencode.terminal").setup(win.win)
+				end,
+			},
+		}
 		---@type opencode.Opts
 		vim.g.opencode_opts = {
-			-- Your configuration, if any; goto definition on the type or field for details
 			lsp = {
 				enabled = true,
+			},
+			server = {
+				start = function()
+					require("snacks.terminal").open(opencode_cmd, snacks_terminal_opts)
+				end,
+				stop = function()
+					require("snacks.terminal").get(opencode_cmd, snacks_terminal_opts):close()
+				end,
+				toggle = function()
+					require("snacks.terminal").toggle(opencode_cmd, snacks_terminal_opts)
+				end,
 			},
 		}
 
