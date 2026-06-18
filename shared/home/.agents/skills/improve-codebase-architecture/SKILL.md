@@ -9,5 +9,10 @@ Compatibility adapter. Load and follow:
 
 `/home/unbalanced/.agents/skills/architecture/SKILL.md`
 
-Use the architecture references in that skill for language, deepening,
-interface design, and optional temp-dir HTML reports.
+Also use:
+
+- `/home/unbalanced/.agents/skills/codebase-design/SKILL.md`
+- `/home/unbalanced/.agents/skills/domain-modeling/SKILL.md` when domain terms
+  or ADRs need updates.
+
+Write optional HTML reports to the OS temp directory, not the repo.

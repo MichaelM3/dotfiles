@@ -19,3 +19,13 @@ fi
 [ -f /usr/share/fzf/key-bindings.zsh ] && source /usr/share/fzf/key-bindings.zsh
 [ -f "$HOME/.local/bin/env" ] && source "$HOME/.local/bin/env"
 
+
+# bun completions
+[ -s "/home/unbalanced/.bun/_bun" ] && source "/home/unbalanced/.bun/_bun"
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
+
+# opencode
+export PATH=/home/unbalanced/.opencode/bin:$PATH

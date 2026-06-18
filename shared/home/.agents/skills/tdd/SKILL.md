@@ -16,12 +16,13 @@ vocabulary.
 
 Tests should verify behavior through public interfaces, not internal implementation. Prefer integration-style tests at the smallest useful surface: exported function, command, route, component behavior, or service boundary.
 
+Use `/home/unbalanced/.agents/skills/codebase-design/SKILL.md` when choosing or
+designing the test seam.
+
 See references when needed:
 
 - `references/tests.md`
 - `references/mocking.md`
-- `references/interface-design.md`
-- `references/deep-modules.md`
 - `references/refactoring.md`
 
 ## Anti-Pattern

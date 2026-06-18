@@ -4,6 +4,7 @@ local opts = { noremap = true, silent = true }
 -- Explorer
 -- keymap("n", "<leader>pv", vim.cmd.Ex)
 keymap("i", "jk", "<ESC>", opts)
+keymap("t", "jk", "<C-\\><C-n>", opts)
 keymap("n", "<leader>q", "<cmd>q<CR>", opts)
 keymap("n", "<leader>w", "<cmd>w!<CR>", opts)
 

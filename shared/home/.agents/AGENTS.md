@@ -50,34 +50,36 @@ Load and follow:
 
 `/home/unbalanced/.agents/skills/sub-agent-capabilities/SKILL.md`
 
-Use GPT-5.5 with high reasoning as the main Orchestrator brain. Keep
-agent trees bounded by `max_depth = 1`. Codex custom sub-agents live in
-`/home/unbalanced/.agents/codex/agents/`.
-
-Use `cavecrew` only when the user explicitly allows subagents or asks for
-delegation. Keep delegated tasks bounded and outputs path-first.
+Keep agent trees bounded by depth 1. Use `cavecrew` only when the user
+explicitly allows subagents or asks for delegation. Keep delegated tasks
+bounded and outputs path-first.
 
 ## Skill Map
 
 - Terse mode: `caveman`.
 - Compressed sub-agent output: `cavecrew`.
-- Codex orchestration: `codex-mini-orchestrate`.
+- Harness-specific orchestration only on explicit request: `codex-mini-orchestrate`.
 - Commit generation: `generate-commits`.
 - PR summaries: `pr-summary`.
 - Sub-agent policy: `sub-agent-capabilities`.
 - Plan checks: `verify-plan`.
-- Debugging: `diagnose`.
+- Matt-style flow router: `ask-matt`.
+- Implementation flow: `implement`; review flow: `review`.
+- Debugging: `diagnosing-bugs`; compatibility name: `diagnose`.
 - Test-first work: `tdd`.
-- Refactoring and system shape: `architecture`.
+- Domain docs: `domain-modeling`.
+- Refactoring and system shape: `architecture`, `codebase-design`.
 - Architecture compatibility name: `improve-codebase-architecture`.
-- PRDs, plans, issues, grilling: `planning`, `to-prd`, `to-issues`,
-  `grill-me`, `grill-with-docs`, `zoom-out`.
-- Matt-style project setup: `setup-matt-pocock-skills`.
+- Thermonuclear code quality review: `thermo-nuclear-code-quality-review`.
+- Planning router: `planning`; focused planning: `to-prd`, `to-issues`,
+  `grill-me`, `grilling`, `grill-with-docs`, `zoom-out`.
 - Issue readiness: `triage`.
 - Throwaway exploration: `prototype`.
 - Handoffs: `handoff`.
-- Skill writing: `skill-authoring`, `write-a-skill`.
+- Skill writing: `skill-authoring`, `writing-great-skills`, `write-a-skill`.
 - Skill discovery: `find-skills`.
+- Teaching: `teach`.
+- Merge/rebase conflicts: `resolving-merge-conflicts`.
 - Misc repo tools: `git-guardrails-claude-code`, `migrate-to-shoehorn`,
   `scaffold-exercises`, `setup-pre-commit`.
 - Caveman variants: `caveman-review`, `caveman-commit`,

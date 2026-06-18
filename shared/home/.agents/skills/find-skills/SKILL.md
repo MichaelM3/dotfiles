@@ -1,6 +1,6 @@
 ---
 name: find-skills
-description: Helps discover installable agent skills when user asks for added capability.
+description: Discover installable agent skills. Use when the user asks whether a skill exists, wants added capability, or asks to extend the agent with a reusable skill.
 ---
 
 # Find Skills

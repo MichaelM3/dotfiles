@@ -1,73 +1,57 @@
 ---
 name: cavecrew
-description: Token-efficient delegation and agent-handoff patterns for Codex subagents. Use when the user explicitly asks to delegate, spawn subagents, use cavecrew, save context with agents, or coordinate investigator/builder/reviewer handoffs.
+description: Token-efficient subagent handoffs. Use when the user explicitly asks to delegate, spawn subagents, use cavecrew, save context with agents, or coordinate compact investigator/builder/reviewer outputs.
 ---
 
 # Cavecrew
 
-Use only when subagents are allowed by the user or current instructions. Keep
-main thread responsible for plan, integration, and final verification.
+Use only when subagents are allowed. Parent owns plan, integration, and final verification.
 
-Goal: subagent results stay compact enough to preserve main-thread context.
-Prefer path-first facts over prose.
+Goal: child outputs stay path-first and compact.
 
 ## Roles
 
-- Investigator: locate definitions, callers, tests, errors, or relevant files. Output path-first facts.
-- Builder: make a bounded edit in known files. Best for 1-2 files with clear ownership.
-- Reviewer: inspect a diff or touched files for bugs and missing verification.
+- Investigator: find definitions, callers, tests, errors, or relevant files.
+- Builder: make a bounded edit in known files with clear ownership.
+- Reviewer: inspect diff/touched files for actionable findings.
 
-## When To Delegate
+## Delegate When
 
-- Use investigator for broad search that can run beside local work.
-- Use builder for independent edits with disjoint write scope.
-- Use reviewer after implementation while main thread continues verification.
-- Keep blocking, tightly coupled, or high-judgment work in main thread.
-- Use normal prose when the user needs explanation, tradeoffs, or architecture commentary.
+- Search can run beside local work.
+- Edit scope is independent and disjoint.
+- Review can happen after implementation while parent verifies.
 
-## Output Contracts
+Keep blocking, coupled, or high-judgment work in parent.
 
-Ask investigators for:
+## Output Shapes
+
+Investigator:
 
 ```text
-Findings:
-- path:line - `symbol` - note
-totals: ...
+findings:
+- path:line - symbol - note
+gaps: ...
 ```
 
-Ask builders for:
+Builder:
 
 ```text
 changed:
 - path - summary
-verified: command/result or not run
+verified: command -> result
 blocked: none|reason
 ```
 
-Ask reviewers for:
+Reviewer:
 
 ```text
 path:line: severity: problem. fix.
 totals: ...
 ```
 
-## Chaining
+## Guardrails
 
-- Locate -> fix -> verify: investigator returns sites, builder edits selected files, reviewer audits diff.
-- Parallel scout: spawn separate investigators for definitions, callers, and tests.
-- Single-shot edit: skip investigator only when exact files are already known.
-
-## Avoid
-
-- Do not send builder broad refactors or unknown file ownership.
-- Do not chain investigator -> builder for 3+ file features; split work first.
-- Do not ask reviewer for general feedback. It returns findings only.
-- Paraphrase terse output before showing it directly to humans.
-
-## Main Thread Duties
-
-1. Define concrete task and ownership.
-2. Tell workers they are not alone in the codebase and must not revert others' edits.
-3. Avoid duplicate assignments.
-4. Review returned changes before relying on them.
-5. Integrate results into one coherent final answer.
+- No broad refactors as child tasks.
+- No overlapping writers.
+- No generic reviewer feedback; findings only.
+- Parent reviews output before relying on it.

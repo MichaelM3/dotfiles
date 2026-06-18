@@ -22,6 +22,8 @@ return {
         cmp.setup({
             completion = {
                 completeopt = "menu,menuone,preview,noselect",
+                -- NeoCodeium is primary inline AI; invoke cmp with <C-Space> (see neocodeium.lua).
+                autocomplete = false,
             },
             snippet = { -- configure how nvim-cmp interacts with snippet engine
                 expand = function(args)

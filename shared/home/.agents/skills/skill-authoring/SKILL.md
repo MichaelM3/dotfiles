@@ -29,11 +29,12 @@ improve deterministic execution.
 ## Design Rules
 
 - Description carries trigger logic; keep it specific.
-- Body carries procedure; keep it under 500 lines.
-- Prefer one focused skill per trigger surface. Consolidate only when workflows are usually invoked together.
-- Move long examples or variants into `references/` and mention exactly when to read them.
+- Keep `SKILL.md` concise: target under 60 lines; hard cap 100 unless truly exceptional.
+- One skill does one job. Compose router skills from focused skills instead of embedding whole workflows.
+- Prefer harness-agnostic language. Put Codex/Cursor/Claude/Pi mechanics in explicit adapter skills or references.
+- Move long examples, prompt templates, command snippets, and variants into `references/`; name exactly when to read them.
 - Do not include README, changelog, install notes, or process history inside skill folders.
-- Avoid project-specific names unless the skill is truly project-specific.
+- Avoid person/profile/project-specific names unless the skill is truly scoped that way.
 
 ## Verification
 
