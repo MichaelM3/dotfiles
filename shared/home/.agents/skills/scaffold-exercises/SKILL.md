@@ -1,53 +1,106 @@
 ---
 name: scaffold-exercises
-description: Scaffold AI Hero-style exercise directories with sections, problem/solution/explainer variants, and lintable readmes. Use only in repos that already use an exercises/ layout or `pnpm ai-hero-cli internal lint`, or when the user explicitly asks to create that course convention.
+description: Create exercise directory structures with sections, problems, solutions, and explainers that pass linting. Use when user wants to scaffold exercises, create exercise stubs, or set up a new course section.
 ---
 
 # Scaffold Exercises
 
-Create exercise directory structures that pass the repo's exercise linter.
+Create exercise directory structures that pass `pnpm ai-hero-cli internal lint`, then commit with `git commit`.
 
-## Preconditions
+## Directory naming
 
-- Existing `exercises/` directory or explicit user request to create it.
-- Repo uses `pnpm ai-hero-cli internal lint`, or user confirms this convention.
+- **Sections**: `XX-section-name/` inside `exercises/` (e.g., `01-retrieval-skill-building`)
+- **Exercises**: `XX.YY-exercise-name/` inside a section (e.g., `01.03-retrieval-with-bm25`)
+- Section number = `XX`, exercise number = `XX.YY`
+- Names are dash-case (lowercase, hyphens)
 
-## Naming
+## Exercise variants
 
-- Section: `exercises/XX-section-name/`
-- Exercise: `XX.YY-exercise-name/`
-- Names are lowercase dash-case.
+Each exercise needs at least one of these subfolders:
 
-## Variants
+- `problem/` - student workspace with TODOs
+- `solution/` - reference implementation
+- `explainer/` - conceptual material, no TODOs
 
-Each exercise needs at least one:
+When stubbing, default to `explainer/` unless the plan specifies otherwise.
 
-- `problem/`
-- `solution/`
-- `explainer/`
+## Required files
 
-Default to `explainer/` for stubs unless the plan specifies variants.
+Each subfolder (`problem/`, `solution/`, `explainer/`) needs a `readme.md` that:
 
-## Required Files
+- Is **not empty** (must have real content, even a single title line works)
+- Has no broken links
 
-Each variant has a non-empty `readme.md`:
+When stubbing, create a minimal readme with a title and a description:
 
-```markdown
+```md
 # Exercise Title
 
-Short description.
+Description here
 ```
 
-If a variant contains code, add the required starter file for the repo
-convention. Read existing exercises before choosing file names.
+If the subfolder has code, it also needs a `main.ts` (>1 line). But for stubs, a readme-only exercise is fine.
 
 ## Workflow
 
-1. Parse sections, exercise names, numbers, and variants from the plan.
-2. Inspect existing exercises for numbering and conventions.
-3. Create directories and readme stubs.
-4. Use `git mv` for renames.
-5. Run `pnpm ai-hero-cli internal lint`.
-6. Fix lint failures.
+1. **Parse the plan** - extract section names, exercise names, and variant types
+2. **Create directories** - `mkdir -p` for each path
+3. **Create stub readmes** - one `readme.md` per variant folder with a title
+4. **Run lint** - `pnpm ai-hero-cli internal lint` to validate
+5. **Fix any errors** - iterate until lint passes
 
-Do not commit unless the user explicitly asks.
+## Lint rules summary
+
+The linter (`pnpm ai-hero-cli internal lint`) checks:
+
+- Each exercise has subfolders (`problem/`, `solution/`, `explainer/`)
+- At least one of `problem/`, `explainer/`, or `explainer.1/` exists
+- `readme.md` exists and is non-empty in the primary subfolder
+- No `.gitkeep` files
+- No `speaker-notes.md` files
+- No broken links in readmes
+- No `pnpm run exercise` commands in readmes
+- `main.ts` required per subfolder unless it's readme-only
+
+## Moving/renaming exercises
+
+When renumbering or moving exercises:
+
+1. Use `git mv` (not `mv`) to rename directories - preserves git history
+2. Update the numeric prefix to maintain order
+3. Re-run lint after moves
+
+Example:
+
+```bash
+git mv exercises/01-retrieval/01.03-embeddings exercises/01-retrieval/01.04-embeddings
+```
+
+## Example: stubbing from a plan
+
+Given a plan like:
+
+```
+Section 05: Memory Skill Building
+- 05.01 Introduction to Memory
+- 05.02 Short-term Memory (explainer + problem + solution)
+- 05.03 Long-term Memory
+```
+
+Create:
+
+```bash
+mkdir -p exercises/05-memory-skill-building/05.01-introduction-to-memory/explainer
+mkdir -p exercises/05-memory-skill-building/05.02-short-term-memory/{explainer,problem,solution}
+mkdir -p exercises/05-memory-skill-building/05.03-long-term-memory/explainer
+```
+
+Then create readme stubs:
+
+```
+exercises/05-memory-skill-building/05.01-introduction-to-memory/explainer/readme.md -> "# Introduction to Memory"
+exercises/05-memory-skill-building/05.02-short-term-memory/explainer/readme.md -> "# Short-term Memory"
+exercises/05-memory-skill-building/05.02-short-term-memory/problem/readme.md -> "# Short-term Memory"
+exercises/05-memory-skill-building/05.02-short-term-memory/solution/readme.md -> "# Short-term Memory"
+exercises/05-memory-skill-building/05.03-long-term-memory/explainer/readme.md -> "# Long-term Memory"
+```

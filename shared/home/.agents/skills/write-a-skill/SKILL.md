@@ -7,8 +7,8 @@ description: Compatibility adapter for skill-authoring. Use when the user asks t
 
 Compatibility adapter. Load and follow both:
 
-- `/home/unbalanced/.agents/skills/skill-authoring/SKILL.md`
-- `/home/unbalanced/.agents/skills/writing-great-skills/SKILL.md`
+- `$HOME/.agents/skills/skill-authoring/SKILL.md`
+- `$HOME/.agents/skills/writing-for-agents/SKILL.md`
 
 Use shared harness layout:
 

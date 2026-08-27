@@ -9,7 +9,7 @@ Give the higher-level map before diving deeper.
 
 ## Project Docs
 
-Follow `/home/unbalanced/.agents/instructions/project-artifacts.md`.
+Follow `$HOME/.agents/instructions/project-artifacts.md`.
 Read `.agents/domain.md`, glossaries, ADRs, and legacy compatibility docs before
 mapping the code. Use glossary vocabulary in the explanation.
 

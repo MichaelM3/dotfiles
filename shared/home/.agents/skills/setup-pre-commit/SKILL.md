@@ -1,32 +1,52 @@
 ---
 name: setup-pre-commit
-description: Add Husky, lint-staged, Prettier, and optional typecheck/test pre-commit hooks to JavaScript or TypeScript package repos. Use only when package.json exists and the user asks to set up pre-commit hooks or lint-staged.
+description: Set up Husky pre-commit hooks with lint-staged (Prettier), type checking, and tests in the current repo. Use when user wants to add pre-commit hooks, set up Husky, configure lint-staged, or add commit-time formatting/typechecking/testing.
 ---
 
-# Setup Pre-Commit
+# Setup Pre-Commit Hooks
 
-Set up repo-local pre-commit checks without overwriting existing workflow.
+## What This Sets Up
 
-## Preconditions
+- **Husky** pre-commit hook
+- **lint-staged** running Prettier on all staged files
+- **Prettier** config (if missing)
+- **typecheck** and **test** scripts in the pre-commit hook
 
-- `package.json` exists.
-- User asked for pre-commit hooks, Husky, lint-staged, or commit-time checks.
+## Steps
 
-If preconditions fail, stop and explain.
+### 1. Detect package manager
 
-## Process
+Check for `package-lock.json` (npm), `pnpm-lock.yaml` (pnpm), `yarn.lock` (yarn), `bun.lockb` (bun). Use whichever is present. Default to npm if unclear.
 
-1. Detect package manager by lockfile: pnpm, npm, yarn, bun.
-2. Read existing `package.json`, Husky config, lint-staged config, and Prettier
-   config.
-3. Install dev dependencies: `husky`, `lint-staged`, `prettier` unless already
-   present.
-4. Initialize or update Husky for the detected package manager.
-5. Create/update `.husky/pre-commit`:
-   - run lint-staged
-   - run typecheck only if a script exists
-   - run tests only if a script exists and user wants full test cost at commit
-6. Create/update lint-staged config:
+### 2. Install dependencies
+
+Install as devDependencies:
+
+```
+husky lint-staged prettier
+```
+
+### 3. Initialize Husky
+
+```bash
+npx husky init
+```
+
+This creates `.husky/` dir and adds `prepare: "husky"` to package.json.
+
+### 4. Create `.husky/pre-commit`
+
+Write this file (no shebang needed for Husky v9+):
+
+```
+npx lint-staged
+npm run typecheck
+npm run test
+```
+
+**Adapt**: Replace `npm` with detected package manager. If repo has no `typecheck` or `test` script in package.json, omit those lines and tell the user.
+
+### 5. Create `.lintstagedrc`
 
 ```json
 {
@@ -34,7 +54,38 @@ If preconditions fail, stop and explain.
 }
 ```
 
-7. Add a Prettier config only if none exists.
-8. Verify the hook and `lint-staged` command.
+### 6. Create `.prettierrc` (if missing)
 
-Do not commit unless the user explicitly asks.
+Only create if no Prettier config exists. Use these defaults:
+
+```json
+{
+  "useTabs": false,
+  "tabWidth": 2,
+  "printWidth": 80,
+  "singleQuote": false,
+  "trailingComma": "es5",
+  "semi": true,
+  "arrowParens": "always"
+}
+```
+
+### 7. Verify
+
+- [ ] `.husky/pre-commit` exists and is executable
+- [ ] `.lintstagedrc` exists
+- [ ] `prepare` script in package.json is `"husky"`
+- [ ] `prettier` config exists
+- [ ] Run `npx lint-staged` to verify it works
+
+### 8. Commit
+
+Stage all changed/created files and commit with message: `Add pre-commit hooks (husky + lint-staged + prettier)`
+
+This will run through the new pre-commit hooks: a good smoke test that everything works.
+
+## Notes
+
+- Husky v9+ doesn't need shebangs in hook files
+- `prettier --ignore-unknown` skips files Prettier can't parse (images, etc.)
+- The pre-commit runs lint-staged first (fast, staged-only), then full typecheck and tests

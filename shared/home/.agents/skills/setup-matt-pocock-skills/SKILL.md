@@ -1,83 +1,91 @@
 ---
 name: setup-matt-pocock-skills
-description: Scaffold Matt Pocock-style per-repo skill config under PROJECT_ROOT/.agents for issue tracking, triage labels, and domain docs. Use before first use of to-prd, to-issues, triage, grill-with-docs, diagnosing-bugs, tdd, architecture, or implement in a repo.
+description: "Configure the active repo for Matt Pocock-style engineering skills: issue tracking, triage labels, and domain docs under PROJECT_ROOT/.agents. Run once before first use of those workflows."
 disable-model-invocation: true
 ---
 
 # Setup Matt Pocock Skills
 
-Prompt-driven setup for shared agent skills. Explore, show findings,
-ask one decision at a time, then write only after confirmation.
+Scaffold per-repo configuration for machine-level shared skills. Explore,
+present findings, ask one decision at a time, and write only after confirmation.
 
 ## Project Root
 
-Follow `/home/unbalanced/.agents/instructions/project-artifacts.md`.
-Resolve `PROJECT_ROOT` with `git rev-parse --show-toplevel`; if that fails,
-ask before using the current directory. New project artifacts go only under
-`PROJECT_ROOT/.agents`.
+Follow `$HOME/.agents/instructions/project-artifacts.md`. Resolve
+`PROJECT_ROOT` with `git rev-parse --show-toplevel`; if that fails, ask before
+using the current directory. All generated files go under
+`PROJECT_ROOT/.agents`, never the shared skill installation.
 
 ## Explore
 
 Read what already exists:
 
-- `git remote -v` and `.git/config`
-- `AGENTS.md`
-- `CLAUDE.md`
-- `.agents/issue-tracker.md`
-- `.agents/triage-labels.md`
-- `.agents/domain.md`
-- `.agents/CONTEXT.md`
-- `.agents/CONTEXT-MAP.md`
-- `.agents/adr/`
-- Legacy root `CONTEXT.md`, `CONTEXT-MAP.md`, and ADRs
+- `git remote -v`, `.git/config`, `AGENTS.md`, and `CLAUDE.md`
+- `.agents/issue-tracker.md`, `.agents/triage-labels.md`, `.agents/domain.md`
+- `.agents/CONTEXT.md`, `.agents/CONTEXT-MAP.md`, `.agents/adr/`, and contexts
+- Legacy root `CONTEXT.md`, `CONTEXT-MAP.md`, `docs/adr/`, `docs/agents/`,
+  `.scratch/`, and `.out-of-scope/`
+- Whether `triage` is installed
+- Monorepo signals such as `pnpm-workspace.yaml`, package workspaces, or
+  populated `packages/*`
 
-Summarize present/missing config before asking.
+Summarize present and missing config before asking.
 
 ## Decisions
 
-Ask these one at a time.
+Take these sections in order, one answer at a time. Skip a section when
+exploration already settled it.
 
-1. Issue tracker:
-   - GitHub: use `gh`.
-   - GitLab: use `glab`.
-   - Local markdown: write PRDs/issues under `.agents/issues/`.
-   - Other: record the user's one-paragraph workflow. Treat Linear as other
-     unless a dedicated Linear adapter is requested later.
-2. Triage labels:
-   - Map canonical roles to tracker labels: `needs-triage`, `needs-info`,
-     `ready-for-agent`, `ready-for-human`, `wontfix`.
-   - Defaults are role names.
-3. Domain docs:
-   - Single context: `.agents/CONTEXT.md` and `.agents/adr/`.
-   - Multi-context: `.agents/CONTEXT-MAP.md` and
-     `.agents/contexts/<context-slug>/`.
-   - Create `.agents/CONTEXT-MAP.md` only after explicit multi-context
-     confirmation.
+### Issue Tracker
 
-## Draft
+Recommend GitHub for a GitHub remote, GitLab for a GitLab remote, otherwise
+offer local markdown. Choices:
 
-Show the exact planned changes:
+- GitHub via `gh`
+- GitLab via `glab`
+- Local markdown under `.agents/issues/`
+- Other, recorded as the user's one-paragraph workflow
 
-- `AGENTS.md` `## Agent skills` block, if present or user approves creating it.
+Keep external PR triage disabled by default. Record the choice in
+`.agents/issue-tracker.md`.
+
+### Triage Labels
+
+Skip when `triage` is not installed. Otherwise ask whether to keep the default
+labels: `needs-triage`, `needs-info`, `ready-for-agent`, `ready-for-human`, and
+`wontfix`. Collect overrides only when the user declines.
+
+### Domain Docs
+
+Default silently to a single context. Offer multi-context only when monorepo
+signals exist and create `.agents/CONTEXT-MAP.md` only after confirmation.
+
+## Draft And Write
+
+Show exact drafts before writing:
+
+- An `## Agent skills` block for an existing `CLAUDE.md` or `AGENTS.md`
 - `.agents/issue-tracker.md`
-- `.agents/triage-labels.md`
+- `.agents/triage-labels.md` when triage is installed
 - `.agents/domain.md`
 
-Use the references in this folder as seeds:
+Prefer an existing `CLAUDE.md`, then an existing `AGENTS.md`. If neither
+exists, ask which one to create. Update an existing `## Agent skills` block in
+place and preserve surrounding user content.
 
-- `references/issue-tracker-github.md`
-- `references/issue-tracker-gitlab.md`
-- `references/issue-tracker-local.md`
-- `references/triage-labels.md`
-- `references/domain.md`
+Use this folder's seed files, translating their documented output paths to
+`.agents` as required by the shared project-artifact policy:
 
-## Write
+- `issue-tracker-github.md`
+- `issue-tracker-gitlab.md`
+- `issue-tracker-local.md`
+- `triage-labels.md`
+- `domain.md`
 
-- Update an existing `## Agent skills` block in `AGENTS.md`; avoid duplicates.
-- If `AGENTS.md` does not exist, ask before creating it.
-- Do not create glossaries, ADRs, or local issue files during setup unless the
-  user explicitly asks. Those are lazy artifacts.
+Do not create glossaries, ADRs, local tickets, research notes, or questionnaires
+during setup. Those artifacts are lazy.
 
 ## Done
 
-Report which files changed and which skills will read them.
+Report changed files and which skills consume them. Re-running setup is needed
+only to change this repo's workflow configuration.

@@ -8,7 +8,7 @@ load this file, then add only the smallest harness-local override needed.
 
 Default to caveman ultra in every new chat. Load and follow:
 
-`/home/unbalanced/.agents/skills/caveman/SKILL.md`
+`$HOME/.agents/skills/caveman/SKILL.md`
 
 Use ultra intensity unless the user explicitly asks for another caveman level or
 says "stop caveman" / "normal mode". Preserve technical accuracy; drop filler.
@@ -17,7 +17,7 @@ says "stop caveman" / "normal mode". Preserve technical accuracy; drop filler.
 
 1. User request and current conversation.
 2. Repository-local `AGENTS.md`, `CONTEXT.md`, ADRs, and framework docs.
-3. Shared instructions, skills, and agents in `/home/unbalanced/.agents/`.
+3. Shared instructions, skills, and agents in `$HOME/.agents/`.
 4. Harness-native global skills and system instructions.
 5. Existing code style and tests.
 
@@ -32,13 +32,13 @@ says "stop caveman" / "normal mode". Preserve technical accuracy; drop filler.
 
 ## Shared Paths
 
-- Shared guide: `/home/unbalanced/.agents/AGENTS.md`.
-- Shared skills: `/home/unbalanced/.agents/skills/`.
-- Codex custom agents: `/home/unbalanced/.agents/codex/agents/`.
-- Cursor custom agents: `/home/unbalanced/.agents/cursor/agents/`.
-- Shared instructions: `/home/unbalanced/.agents/instructions/`.
-- Shared Cursor rules: `/home/unbalanced/.agents/cursor/rules/`.
-- Shared templates: `/home/unbalanced/.agents/templates/`.
+- Shared guide: `$HOME/.agents/AGENTS.md`.
+- Shared skills: `$HOME/.agents/skills/`.
+- Codex custom agents: `$HOME/.agents/codex/agents/`.
+- Cursor custom agents: `$HOME/.agents/cursor/agents/`.
+- Shared instructions: `$HOME/.agents/instructions/`.
+- Shared Cursor rules: `$HOME/.agents/cursor/rules/`.
+- Shared templates: `$HOME/.agents/templates/`.
 
 Harness configs should reference these paths instead of duplicating shared
 rules. Keep project-specific skills and instructions out of this shared root
@@ -48,7 +48,7 @@ unless they apply to every repo.
 
 Load and follow:
 
-`/home/unbalanced/.agents/skills/sub-agent-capabilities/SKILL.md`
+`$HOME/.agents/skills/sub-agent-capabilities/SKILL.md`
 
 Keep agent trees bounded by depth 1. Use `cavecrew` only when the user
 explicitly allows subagents or asks for delegation. Keep delegated tasks
@@ -64,21 +64,24 @@ bounded and outputs path-first.
 - Sub-agent policy: `sub-agent-capabilities`.
 - Plan checks: `verify-plan`.
 - Matt-style flow router: `ask-matt`.
-- Implementation flow: `implement`; review flow: `review`.
+- Implementation flow: `implement`; review flow: `code-review` (`review` alias).
 - Debugging: `diagnosing-bugs`; compatibility name: `diagnose`.
 - Test-first work: `tdd`.
 - Domain docs: `domain-modeling`.
 - Refactoring and system shape: `architecture`, `codebase-design`.
 - Architecture compatibility name: `improve-codebase-architecture`.
 - Thermonuclear code quality review: `thermo-nuclear-code-quality-review`.
-- Planning router: `planning`; focused planning: `to-prd`, `to-issues`,
-  `grill-me`, `grilling`, `grill-with-docs`, `zoom-out`.
+- Planning router: `ask-matt` or `planning`; focused planning: `to-spec`,
+  `to-tickets`, `wayfinder`, `grill-me`, `grilling`, `grill-with-docs`.
+- Planning compatibility names: `to-prd`, `to-issues`, `zoom-out`.
 - Issue readiness: `triage`.
 - Throwaway exploration: `prototype`.
 - Handoffs: `handoff`.
-- Skill writing: `skill-authoring`, `writing-great-skills`, `write-a-skill`.
+- Skill writing: `skill-authoring`, `writing-for-agents`; compatibility names:
+  `writing-great-skills`, `write-a-skill`.
 - Skill discovery: `find-skills`.
-- Teaching: `teach`.
+- Teaching and async discovery: `teach`, `to-questionnaire`, `research`.
+- Manual human workflows: `wizard`; concise re-pitching: `wait-what`.
 - Merge/rebase conflicts: `resolving-merge-conflicts`.
 - Misc repo tools: `git-guardrails-claude-code`, `migrate-to-shoehorn`,
   `scaffold-exercises`, `setup-pre-commit`.
@@ -114,7 +117,7 @@ next.
 
 Matt-style project docs live under `PROJECT_ROOT/.agents`. Load and follow:
 
-`/home/unbalanced/.agents/instructions/project-artifacts.md`
+`$HOME/.agents/instructions/project-artifacts.md`
 
 ## Project-Specific Rules
 

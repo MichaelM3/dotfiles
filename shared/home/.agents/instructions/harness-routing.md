@@ -1,9 +1,9 @@
 # Harness Routing
 
-Use `/home/unbalanced/.agents/AGENTS.md` as the shared entry point for agent
+Use `$HOME/.agents/AGENTS.md` as the shared entry point for agent
 harnesses. Harness-local `AGENTS.md` files should stay as small shims:
 
-1. Load and follow `/home/unbalanced/.agents/AGENTS.md`.
+1. Load and follow `$HOME/.agents/AGENTS.md`.
 2. Add harness-specific runtime notes only when the harness needs them.
 3. Leave project-specific behavior to project-local `AGENTS.md`, `CONTEXT.md`,
    ADRs, or skills.

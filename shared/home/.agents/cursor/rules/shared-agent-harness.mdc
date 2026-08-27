@@ -7,14 +7,14 @@ alwaysApply: true
 
 Load and follow:
 
-`/home/unbalanced/.agents/AGENTS.md`
+`$HOME/.agents/AGENTS.md`
 
 Use Cursor adapter skills from:
 
-`/home/unbalanced/.agents/cursor/skills/`
+`$HOME/.agents/cursor/skills/`
 
 Use shared custom agents from:
 
-`/home/unbalanced/.agents/cursor/agents/`
+`$HOME/.agents/cursor/agents/`
 
 Cursor-specific runtime state stays in `/home/unbalanced/.cursor/`.

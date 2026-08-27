@@ -1,30 +1,23 @@
-#!/usr/bin/env bash
-set -euo pipefail
+#!/bin/bash
 
-input=""
-if ! [[ -t 0 ]]; then
-  input="$(cat)"
-fi
+INPUT=$(cat)
+COMMAND=$(echo "$INPUT" | jq -r '.tool_input.command')
 
-command="$*"
-if [[ -n "$input" ]] && command -v jq >/dev/null 2>&1; then
-  parsed="$(printf '%s' "$input" | jq -r '.tool_input.command // .command // empty' 2>/dev/null || true)"
-  [[ -n "$parsed" ]] && command="$parsed"
-fi
-
-dangerous_patterns=(
-  '(^|[;&|[:space:]])git[[:space:]]+push([[:space:]]|$)'
-  '(^|[;&|[:space:]])git[[:space:]]+reset[[:space:]]+--hard([[:space:]]|$)'
-  '(^|[;&|[:space:]])git[[:space:]]+clean[[:space:]]+-f(d)?([[:space:]]|$)'
-  '(^|[;&|[:space:]])git[[:space:]]+branch[[:space:]]+-D([[:space:]]|$)'
-  '(^|[;&|[:space:]])git[[:space:]]+checkout[[:space:]]+\.([[:space:]]|$)'
-  '(^|[;&|[:space:]])git[[:space:]]+restore[[:space:]]+\.([[:space:]]|$)'
-  '(^|[;&|[:space:]])git[[:space:]].*--force'
+DANGEROUS_PATTERNS=(
+  "git push"
+  "git reset --hard"
+  "git clean -fd"
+  "git clean -f"
+  "git branch -D"
+  "git checkout \."
+  "git restore \."
+  "push --force"
+  "reset --hard"
 )
 
-for pattern in "${dangerous_patterns[@]}"; do
-  if printf '%s\n' "$command" | grep -Eq "$pattern"; then
-    printf "BLOCKED: '%s' matches dangerous git pattern '%s'. User confirmation required.\n" "$command" "$pattern" >&2
+for pattern in "${DANGEROUS_PATTERNS[@]}"; do
+  if echo "$COMMAND" | grep -qE "$pattern"; then
+    echo "BLOCKED: '$COMMAND' matches dangerous pattern '$pattern'. The user has prevented you from doing this." >&2
     exit 2
   fi
 done
