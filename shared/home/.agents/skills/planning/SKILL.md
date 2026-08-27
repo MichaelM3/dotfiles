@@ -10,8 +10,8 @@ Choose the smallest focused skill that matches the request.
 ## Route
 
 - Unsure which Matt-style flow fits -> `ask-matt`.
-- PRD/spec document -> `to-prd`.
-- Implementation tickets/issues -> `to-issues`.
+- PRD/spec document -> `to-spec` (`to-prd` remains an invocation alias).
+- Implementation tickets/issues -> `to-tickets` (`to-issues` remains an alias).
 - Execute an approved PRD/issue/plan -> `implement`.
 - Pure design interview -> `grill-me`.
 - Design interview that should preserve domain vocabulary or ADRs -> `grill-with-docs`.

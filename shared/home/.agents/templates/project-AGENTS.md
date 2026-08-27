@@ -16,12 +16,12 @@ Load repository-local docs first:
 
 Then apply shared harness guidance from:
 
-`/home/unbalanced/.agents/AGENTS.md`
+`$HOME/.agents/AGENTS.md`
 
 Project-local agent artifacts live under `PROJECT_ROOT/.agents`. Follow the
 shared project artifact contract:
 
-`/home/unbalanced/.agents/instructions/project-artifacts.md`
+`$HOME/.agents/instructions/project-artifacts.md`
 
 Keep project-specific commands, workflows, release rules, and domain skills in
 this repo or a project-local profile.

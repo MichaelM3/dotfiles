@@ -1,60 +1,42 @@
 ---
 name: tdd
-description: Test-driven development for coding agents using red-green-refactor with vertical slices. Use when the user asks for TDD, red-green-refactor, test-first work, behavior coverage, or a bug fix that should start with a failing test.
+description: Test-driven development. Use when the user wants to build features or fix bugs test-first, mentions "red-green-refactor", or wants integration tests.
 ---
 
-# TDD
+# Test-Driven Development
 
-## Project Context
+Follow `$HOME/.agents/instructions/project-artifacts.md`. Resolve the active
+project root and read its `.agents` domain docs plus relevant ADRs before
+choosing seams.
 
-Before writing tests, follow
-`/home/unbalanced/.agents/instructions/project-artifacts.md`. Read relevant
-domain docs and ADRs so test names, interfaces, and examples use project
-vocabulary.
+TDD is the red → green loop. This skill is the reference that makes that loop produce tests worth keeping: what a good test is, where tests go, the anti-patterns, and the rules of the loop. Every section applies on every cycle: consult them before and during the loop, not after.
 
-## Principle
+When exploring the codebase, read `.agents/CONTEXT.md` or the relevant mapped context (if it exists) so test names and interface vocabulary match the project's domain language, and respect `.agents` ADRs in the area you're touching.
 
-Tests should verify behavior through public interfaces, not internal implementation. Prefer integration-style tests at the smallest useful surface: exported function, command, route, component behavior, or service boundary.
+## What a good test is
 
-Use `/home/unbalanced/.agents/skills/codebase-design/SKILL.md` when choosing or
-designing the test seam.
+Tests verify behavior through public interfaces, not implementation details. Code can change entirely; tests shouldn't. A good test reads like a specification: "user can checkout with valid cart" tells you exactly what capability exists, and it survives refactors because it doesn't care about internal structure.
 
-See references when needed:
+See [tests.md](tests.md) for examples and [mocking.md](mocking.md) for mocking guidelines.
 
-- `references/tests.md`
-- `references/mocking.md`
-- `references/refactoring.md`
+## Seams: where tests go
 
-## Anti-Pattern
+A **seam** is the public boundary you test at: the interface where you observe behavior without reaching inside. Tests live at seams, never against internals.
 
-Do not write all tests first, then all implementation. That horizontal slice
-locks tests to imagined shapes. Use tracer bullets: one failing test, one
-minimal implementation, one green check, then repeat.
+**Test only at pre-agreed seams.** Before writing any test, write down the seams under test and confirm them with the user. No test is written at an unconfirmed seam. You can't test everything, so agreeing the seams up front is how testing effort lands on the critical paths and complex logic instead of every edge case.
 
-## Workflow
+Ask: "What's the public interface, and which seams should we test?"
 
-1. Identify the behavior that matters most. Ask only if local context cannot answer it safely.
-2. Write one failing test for one vertical slice. Do not write the whole suite first.
-3. Run only the narrow test and confirm it fails for the expected reason.
-4. Implement the smallest production change that makes it pass.
-5. Run the narrow test again.
-6. Refactor only while green.
-7. Repeat for the next behavior or edge case.
-8. Finish with the relevant broader test command.
+When the shape of that interface is itself in question (how deep the module is, where the seam belongs, what the interface should expose), call the Skill tool with "codebase-design" for the vocabulary. It is the shared source of the module, interface, depth, seam, adapter, leverage and locality terms, and it is a reference to consult, not a session to run.
 
-## Test Selection
+## Anti-patterns
 
-- Start with critical paths, domain rules, bug regressions, and complex branching.
-- Skip brittle tests for private helpers, implementation calls, and incidental DOM or database structure.
-- Use mocks for true external dependencies, not for internal collaborators you can exercise directly.
-- If no good test surface exists, name the architectural friction and keep the first test as high-level as necessary.
-- Prefer deep modules: small public interface, substantial hidden behavior,
-  tests at the same interface callers use.
+- **Implementation-coupled**: mocks internal collaborators, tests private methods, or verifies through a side channel (querying the database instead of using the interface). The tell: the test breaks when you refactor but behavior hasn't changed.
+- **Tautological**: the assertion recomputes the expected value the way the code does (`expect(add(a, b)).toBe(a + b)`, a snapshot derived by hand the same way, a constant asserted equal to itself), so it passes by construction and can never disagree with the code. Expected values must come from an independent source of truth: a known-good literal, a worked example, the spec.
+- **Horizontal slicing**: writing all tests first, then all implementation. Bulk tests verify _imagined_ behavior: you test the _shape_ of things rather than user-facing behavior, the tests go insensitive to real changes, and you commit to test structure before understanding the implementation. Work in **vertical slices** instead: one test → one implementation → repeat, each test a **tracer bullet** that responds to what the last cycle taught you.
 
-## Per-Cycle Checklist
+## Rules of the loop
 
-- One behavior.
-- One expected failure.
-- One minimal implementation.
-- Green before refactor.
-- Existing behavior still covered.
+- **Red before green.** Write the failing test first, then only enough code to pass it. Don't anticipate future tests or add speculative features.
+- **One slice at a time.** One seam, one test, one minimal implementation per cycle.
+- **Refactoring is not part of the loop.** It belongs to the review stage (see the `code-review` skill), not the red → green implementation cycle.

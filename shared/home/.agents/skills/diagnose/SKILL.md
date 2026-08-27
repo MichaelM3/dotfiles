@@ -7,4 +7,4 @@ description: Compatibility adapter for diagnosing-bugs. Use when a user reports 
 
 Compatibility adapter. Load and follow:
 
-`/home/unbalanced/.agents/skills/diagnosing-bugs/SKILL.md`
+`$HOME/.agents/skills/diagnosing-bugs/SKILL.md`
